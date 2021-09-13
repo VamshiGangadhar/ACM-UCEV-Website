@@ -54,20 +54,12 @@ function Navbar() {
     <>
       <Menubar
         className="nav"
-        start={
-          <Image
-            className="nav__acmLogo"
-            src="/imgs/acm-logo.svg"
-            width={150}
-            height={55}
-            alt="ACM logo"
-          />
-        }
+        start={<Image className="nav__acmLogo" src="/imgs/acm-logo.svg" width={200} height={75} alt="ACM logo" />}
         model={items}
       />
       <style jsx global>{`
         .nav {
-          padding: 15px 20px;
+          padding: 0 20px;
           border: none;
           border-bottom: 2px solid #e5e5e5;
           max-width: var(--max-width);
