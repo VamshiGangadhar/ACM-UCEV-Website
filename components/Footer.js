@@ -15,8 +15,8 @@ function Footer() {
           <div className="footer__about">
             <h3 className="footer__colContentTitle">About</h3>
             <p>
-              ACM, The world's largest educational and scientific computing society, delivers resources that advance
-              computing as a science and profession.
+              ACM, The world&apos;s largest educational and scientific computing society, delivers resources that
+              advance computing as a science and profession.
             </p>
           </div>
           <div className="footer__social">

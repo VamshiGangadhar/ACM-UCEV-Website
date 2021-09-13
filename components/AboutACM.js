@@ -6,13 +6,14 @@ function AboutACM() {
       <div className="aboutACM">
         <h1 className="aboutACM__title">About ACM</h1>
         <p className="aboutACM__text">
-          ACM, The world's largest educational and scientific computing society, delivers resources that advance
-          computing as a science and profession. ACM provides the computing field's premier Digital Library and serves
-          its members and the computing profession with leading-edge publications, conferences anc career resources.
+          ACM, The world&apos;s largest educational and scientific computing society, delivers resources that advance
+          computing as a science and profession. ACM provides the computing field&apos;s premier Digital Library and
+          serves its members and the computing profession with leading-edge publications, conferences anc career
+          resources.
         </p>
         <p className="aboutACM__text">
-          Chapters are the "local neighborhoods" of ACM. Professional and Student chapters worldwide serve as nodes of
-          activity for ACM members and the computing community at large, offering seminars, lectures, and the
+          Chapters are the &quot;local neighborhoods&quot; of ACM. Professional and Student chapters worldwide serve as
+          nodes of activity for ACM members and the computing community at large, offering seminars, lectures, and the
           opportunity to meet peers and experts in many fields of interest.
         </p>
       </div>
