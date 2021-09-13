@@ -28,10 +28,15 @@ function AboutJNTUV() {
           color: #3792c1;
         }
         .aboutJNTUV__text {
-          font-size: clamp(18px, 14px, 12px);
+          font-size: 18px;
           color: #222222;
           line-height: 1.5;
           margin-bottom: 10px;
+        }
+        @media only screen and (max-width: 400px) {
+          .aboutJNTUV__text {
+            font-size: 16px;
+          }
         }
       `}</style>
     </>
