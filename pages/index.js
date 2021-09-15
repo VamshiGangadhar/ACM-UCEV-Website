@@ -61,7 +61,7 @@ function index({ eventsOverview }) {
             loading="lazy"
           />
         </div>
-        {eventsOverview.length > 0 && <UpcommingEvents events={eventsOverview} />}
+        <UpcommingEvents events={eventsOverview} />
         <SubscribeNewsLetter />
       </div>
       <Footer />
