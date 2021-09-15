@@ -21,8 +21,7 @@ function AboutACM() {
         .aboutACM {
           flex: 1;
           max-width: 1200px;
-          margin: 0 auto;
-          padding: 20px;
+          margin: 20px auto;
         }
         .aboutACM__title {
           font-size: 30px;

@@ -19,8 +19,7 @@ function AboutJNTUV() {
         .aboutJNTUV {
           flex: 1;
           max-width: 1200px;
-          margin: 0 auto;
-          padding: 20px;
+          margin: 20px auto;
         }
         .aboutJNTUV__title {
           font-size: 30px;

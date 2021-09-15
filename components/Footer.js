@@ -22,10 +22,14 @@ function Footer() {
           <div className="footer__social">
             <h3 className="footer__colContentTitle">Social</h3>
             <div className="footer__socialBtns">
-              <Button className="footer__socialBtn p-button-outlined" label="Youtube" icon="pi pi-youtube" />
-              <Button className="footer__socialBtn p-button-outlined" label="Facebook" icon="pi pi-facebook" />
-              <Button className="footer__socialBtn p-button-outlined" label="Twitter" icon="pi pi-twitter" />
-              <Button className="footer__socialBtn p-button-outlined" label="Instagram" icon="pi pi-info-circle" />
+              <div className="footer__socialBtnsRow">
+                <Button className="footer__socialBtn p-button-outlined" label="Youtube" icon="pi pi-youtube" />
+                <Button className="footer__socialBtn p-button-outlined" label="Facebook" icon="pi pi-facebook" />
+              </div>
+              <div className="footer__socialBtnsRow">
+                <Button className="footer__socialBtn p-button-outlined" label="Twitter" icon="pi pi-twitter" />
+                <Button className="footer__socialBtn p-button-outlined" label="Instagram" icon="pi pi-info-circle" />
+              </div>
             </div>
           </div>
         </div>
@@ -71,13 +75,21 @@ function Footer() {
         .footer__socialBtns {
           display: flex;
           flex-direction: column;
+          gap: 10px;
+        }
+        .footer__socialBtnsRow {
+          display: flex;
+          justify-content: space-evenly;
+          align-items: stretch;
           flex-wrap: wrap;
           min-width: 300px;
-          height: 100px;
-          gap: 5px;
+          gap: 10px;
         }
         .footer__socialBtn {
+          flex: 1;
           color: #bbbbbb !important;
+          max-width: 40vw;
+          height: 40px;
         }
         @media only screen and (max-width: 400px) {
           .footer__colContainer {
@@ -92,7 +104,7 @@ function Footer() {
           .footer__about p {
             text-align: center;
           }
-          .footer__socialBtns {
+          .footer__socialBtnsRow {
             min-width: unset;
           }
         }

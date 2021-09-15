@@ -75,6 +75,9 @@ function SubscribeNewsLetter() {
         .subscribeNewsLetter__email {
           display: block;
         }
+        .p-inputtext {
+          max-width: 80vw !important;
+        }
         .subscribeNewsLetter__btn {
           background-color: #4cb37a;
           color: #eeeeee;

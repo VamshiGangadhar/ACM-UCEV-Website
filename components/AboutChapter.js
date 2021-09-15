@@ -48,8 +48,6 @@ function aboutChapter() {
           display: flex;
           max-width: 1200px;
           margin: 20px auto;
-          border-left: 20px solid transparent;
-          border-right: 20px solid transparent;
           margin-top: 50px;
         }
         .aboutChapter__gallery {
