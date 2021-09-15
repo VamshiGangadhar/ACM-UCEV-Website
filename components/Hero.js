@@ -38,7 +38,7 @@ function Hero() {
         }
         .hero__text {
           color: #ffffff;
-          font-size: 35px;
+          font-size: min(35px, 8vw);
           text-align: center;
         }
         .hero__actionBtns {

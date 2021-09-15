@@ -40,14 +40,16 @@ function Footer() {
         }
         .footer__topper {
           padding: 20px;
-          background-color: #424649;
+          background-color: #3c434b;
           text-align: center;
           color: #b1b1b1;
         }
         .footer__colContainer {
           display: flex;
           justify-content: space-around;
-          padding: 30px 20px 10px 20px;
+          flex-wrap: wrap;
+          gap: 30px;
+          padding: 50px 20px 20px 20px;
           max-width: 1200px;
           margin: 0 auto;
         }
@@ -70,6 +72,7 @@ function Footer() {
           display: flex;
           flex-direction: column;
           flex-wrap: wrap;
+          min-width: 300px;
           height: 100px;
           gap: 5px;
         }
@@ -88,6 +91,9 @@ function Footer() {
           .footer__contact p,
           .footer__about p {
             text-align: center;
+          }
+          .footer__socialBtns {
+            min-width: unset;
           }
         }
       `}</style>

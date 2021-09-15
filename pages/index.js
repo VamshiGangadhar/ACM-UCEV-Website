@@ -1,5 +1,6 @@
 import React from "react";
 import AboutACM from "../components/AboutACM";
+import AboutChapter from "../components/AboutChapter";
 import AboutJNTUV from "../components/AboutJNTUV";
 import Footer from "../components/Footer";
 import Hero from "../components/Hero";
@@ -10,6 +11,7 @@ function index() {
     <>
       <Navbar />
       <Hero />
+      <AboutChapter />
       <div className="home__about">
         <AboutACM />
         <AboutJNTUV />
