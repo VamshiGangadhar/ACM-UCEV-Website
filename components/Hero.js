@@ -35,6 +35,7 @@ function Hero() {
           gap: 20px;
           justify-content: center;
           align-items: center;
+          padding: 30px;
         }
         .hero__text {
           color: #ffffff;
