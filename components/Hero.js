@@ -48,6 +48,7 @@ function Hero() {
         .hero__actionBtn {
           background-color: #ffffff;
           color: #3792c1;
+          border: none;
         }
         .hero__actionBtn:hover {
           background-color: #eeeeee !important;

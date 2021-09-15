@@ -5,6 +5,7 @@ import AboutJNTUV from "../components/AboutJNTUV";
 import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
+import SubscribeNewsLetter from "../components/SubscribeNewsLetter";
 
 function index() {
   return (
@@ -25,6 +26,9 @@ function index() {
           loading="lazy"
         />
       </div>
+      <div className="home__container">
+        <SubscribeNewsLetter />
+      </div>
       <Footer />
       <style jsx>{`
         .home__about {
@@ -36,6 +40,9 @@ function index() {
         .home__map {
           max-width: 1200px;
           margin: 20px auto;
+        }
+        .home__container {
+          padding: 20px;
         }
         @media only screen and (max-width: 400px) {
           .home__about {
