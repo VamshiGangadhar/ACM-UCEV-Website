@@ -39,9 +39,7 @@ export const getStaticProps = async () => {
     },
   };
 };
-function index({ eventsOverview }) {
-  console.log(eventsOverview);
-  const [events, setEvents] = React.useState(eventsOverview);
+function Home({ eventsOverview }) {
   return (
     <>
       <Navbar />
@@ -89,4 +87,4 @@ function index({ eventsOverview }) {
   );
 }
 
-export default index;
+export default Home;

@@ -89,7 +89,7 @@ function aboutChapter() {
             flex-direction: column;
           }
           .aboutChapter__content {
-            padding: 30px;
+            padding: 20px;
           }
           .aboutChapter__galleryImage {
             min-height: 300px;

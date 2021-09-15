@@ -78,6 +78,14 @@ function UpcommingEvents({ events }) {
             flex: unset;
             padding: 0 !important;
           }
+          @media only screen and (max-width: 650px) {
+            .upcommingEvents {
+              flex-direction: column;
+            }
+            .upcommingEvents__img {
+              padding: 40px;
+            }
+          }
           @media only screen and (max-width: 400px) {
             .upcommingEvents {
               flex-direction: column;
