@@ -29,7 +29,6 @@ function Hero() {
       <style jsx global>{`
         .hero {
           min-height: 40vh;
-          background-color: #3792c1;
           display: flex;
           flex-direction: column;
           gap: 20px;

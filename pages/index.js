@@ -18,7 +18,12 @@ export const getStaticProps = async () => {
   const { data } = await client.query({
     query: gql`
       {
-        events {
+        homepageAlbum {
+          photos {
+            url
+          }
+        }
+        events(sort: "Start_time:asc") {
           id
           created_at
           Event_name
@@ -36,16 +41,17 @@ export const getStaticProps = async () => {
   return {
     props: {
       eventsOverview: data.events,
+      homepageAlbum: data.homepageAlbum,
     },
   };
 };
-function Home({ eventsOverview }) {
+function Home({ eventsOverview, homepageAlbum }) {
   return (
     <>
       <Navbar />
       <Hero />
       <div className="home__container">
-        <AboutChapter />
+        <AboutChapter photos={homepageAlbum} />
         <div className="home__about">
           <AboutACM />
           <AboutJNTUV />
@@ -68,7 +74,8 @@ function Home({ eventsOverview }) {
           display: flex;
           justify-content: space-evenly;
           max-width: 1200px;
-          margin: 20px auto;
+          gap: 20px;
+          margin: 30px auto;
         }
         .home__map {
           max-width: 1200px;

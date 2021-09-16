@@ -1,14 +1,14 @@
 import React from "react";
 import { Galleria } from "primereact/galleria";
 
-function aboutChapter() {
+function aboutChapter({ photos }) {
   let itemTemplate = (item) => {
     return (
       <img
-        src={item?.src}
-        alt={item?.alt}
+        src={item?.url}
+        alt="photo"
         className="aboutChapter__galleryImage"
-        style={{ height: "100%", width: "100%", objectFit: "cover" }}
+        style={{ height: "300px", width: "100%", objectFit: "cover" }}
       />
     );
   };
@@ -17,13 +17,7 @@ function aboutChapter() {
       <div className="aboutChapter">
         <div className="aboutChapter__gallery">
           <Galleria
-            value={[
-              { src: "https://source.unsplash.com/random/1600x900", alt: "alt tag" },
-              { src: "https://source.unsplash.com/random/1601x900", alt: "alt tag" },
-              { src: "https://source.unsplash.com/random/1602x900", alt: "alt tag" },
-              { src: "https://source.unsplash.com/random/1603x900", alt: "alt tag" },
-              { src: "https://source.unsplash.com/random/1604x900", alt: "alt tag" },
-            ]}
+            value={photos.photos}
             showItemNavigators
             showThumbnails={false}
             item={itemTemplate}

@@ -2,7 +2,8 @@ import React from "react";
 import { Timeline } from "primereact/timeline";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
-import { format, compareAsc } from "date-fns";
+import { format } from "date-fns";
+import { Chip } from "primereact/chip";
 
 function UpcommingEvents({ events }) {
   const customizedContent = (item) => {
@@ -12,11 +13,16 @@ function UpcommingEvents({ events }) {
         title={item.Event_name}
         subTitle={"Starts at " + format(new Date(item.Start_time), "do MMM yyyy HH:mm bbb")}
       >
+        {item.event_tags.map((tag, index) => (
+          <Chip className="upcommingEvents__cardChip" key={index} label={tag.Tag_name} />
+        ))}
+
         <p className="upcommingEvents__eventDescription">{item.Mini_description.trim()}</p>
         <Button label="Read more" icon="pi pi-arrow-circle-right"></Button>
       </Card>
     );
   };
+
   return (
     <>
       <div className="upcommingEvents">
@@ -28,7 +34,12 @@ function UpcommingEvents({ events }) {
           </p>
           <img className="upcommingEvents__img" src="/imgs/upcomming-events.svg" alt="upcomming events" />
         </div>
-        <Timeline value={events} align="left" className="upcommingEvents__timeline" content={customizedContent} />
+        <Timeline
+          value={events.filter((event) => Date.now() < new Date(event.Start_time))}
+          align="left"
+          className="upcommingEvents__timeline"
+          content={customizedContent}
+        />
       </div>
 
       <style jsx global>
@@ -67,6 +78,13 @@ function UpcommingEvents({ events }) {
             background-color: #f5f5f5 !important;
             border: 1px solid #e0e0e0 !important;
             box-shadow: none;
+          }
+          .upcommingEvents__eventCard .p-card-content {
+            padding: 0;
+          }
+          .upcommingEvents__cardChip {
+            margin-bottom: 10px;
+            font-size: min(14px, 3vw);
           }
           .upcommingEvents__eventDescription {
             font-size: min(16px, 4vw);

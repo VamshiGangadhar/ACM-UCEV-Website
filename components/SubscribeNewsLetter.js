@@ -2,17 +2,29 @@ import React, { useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
+import { Messages } from "primereact/messages";
 
 function SubscribeNewsLetter() {
   let toast = React.useRef(null);
+  let messages = React.useRef(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
   let handleNewsLetterSubmit = (e) => {
     e.preventDefault();
+    setEmail("");
+    setName("");
+    setSubscribed(true);
     toast.current.show({
       severity: "success",
       summary: "Subscribed",
       detail: "You will get notifications to your email inbox",
+    });
+    messages.current.show({
+      severity: "success",
+      detail: "You will get notifications to your email inbox",
+      sticky: true,
+      closable: false,
     });
   };
   return (
@@ -24,23 +36,32 @@ function SubscribeNewsLetter() {
           Subscribe to our newsletter for free and get notified when we conduct new events and promotions directly to
           your email inbox.
         </p>
-        <form className="subscribeNewsLetter__form" onSubmit={handleNewsLetterSubmit}>
-          <span className="subscribeNewsLetter__name p-input-icon-left">
-            <i className="pi pi-user" />
-            <InputText required type="text" value={name} placeholder="Name" onChange={(e) => setName(e.target.value)} />
-          </span>
-          <span className="subscribeNewsLetter__email p-input-icon-left">
-            <i className="pi pi-envelope" />
-            <InputText
-              required
-              type="email"
-              value={email}
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </span>
-          <Button icon="pi pi-send" label="Subscribe" className="subscribeNewsLetter__btn" />
-        </form>
+        <Messages ref={messages} />
+        {!subscribed && (
+          <form className="subscribeNewsLetter__form" onSubmit={handleNewsLetterSubmit}>
+            <span className="subscribeNewsLetter__name p-input-icon-left">
+              <i className="pi pi-user" />
+              <InputText
+                required
+                type="text"
+                value={name}
+                placeholder="Name"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </span>
+            <span className="subscribeNewsLetter__email p-input-icon-left">
+              <i className="pi pi-envelope" />
+              <InputText
+                required
+                type="email"
+                value={email}
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </span>
+            <Button icon="pi pi-send" label="Subscribe" className="subscribeNewsLetter__btn" />
+          </form>
+        )}
       </div>
       <style jsx global>{`
         .subscribeNewsLetter {
