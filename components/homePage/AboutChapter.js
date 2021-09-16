@@ -1,16 +1,9 @@
 import React from "react";
 import { Galleria } from "primereact/galleria";
-
+import Image from "next/image";
 function aboutChapter({ photos }) {
   let itemTemplate = (item) => {
-    return (
-      <img
-        src={item?.url}
-        alt="photo"
-        className="aboutChapter__galleryImage"
-        style={{ height: "300px", width: "100%", objectFit: "cover" }}
-      />
-    );
+    return <Image src={item?.url} alt="photo" objectFit="cover" className="aboutChapter__galleryImage" layout="fill" />;
   };
   return (
     <>
@@ -55,9 +48,12 @@ function aboutChapter({ photos }) {
         .p-galleria-item-container,
         .aboutChapter__galleryImage {
           height: 100%;
+          min-height: 300px;
         }
+
         .p-galleria-item-nav {
           top: 40%;
+          z-index: 99;
         }
         .aboutChapter__galleryImage {
           min-width: min(300px, 80vw);

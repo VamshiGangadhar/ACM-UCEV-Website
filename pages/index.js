@@ -1,13 +1,13 @@
 import React from "react";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-import AboutACM from "../components/AboutACM";
-import AboutChapter from "../components/AboutChapter";
-import AboutJNTUV from "../components/AboutJNTUV";
-import Footer from "../components/Footer";
-import Hero from "../components/Hero";
-import Navbar from "../components/Navbar";
-import SubscribeNewsLetter from "../components/SubscribeNewsLetter";
-import UpcommingEvents from "../components/UpcommingEvents";
+import AboutACM from "../components/homePage/AboutACM";
+import AboutChapter from "../components/homePage/AboutChapter";
+import AboutJNTUV from "../components/homePage/AboutJNTUV";
+import Footer from "../components/layout/Footer";
+import Hero from "../components/homePage/Hero";
+import Navbar from "../components/layout/Navbar";
+import SubscribeNewsLetter from "../components/widgets/SubscribeNewsLetter";
+import UpcommingEvents from "../components/homePage/UpcommingEvents";
 
 export const getStaticProps = async () => {
   const client = new ApolloClient({
