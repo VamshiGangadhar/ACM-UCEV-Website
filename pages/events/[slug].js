@@ -254,6 +254,7 @@ function Event({ data }) {
           padding: 20px;
           border-radius: 6px;
           margin-top: 20px;
+          max-width: 90vw;
         }
         .event__description * {
           max-width: 100%;
@@ -295,6 +296,7 @@ function Event({ data }) {
           border-radius: 6px;
           line-height: 1.5;
           font-family: "Courier New", Courier, monospace;
+          white-space: break-spaces;
         }
          {
           /* EVENT MARKDOWN STYLES END */
