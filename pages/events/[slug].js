@@ -8,6 +8,7 @@ import { Message } from "primereact/message";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export const getStaticPaths = async () => {
   const client = new ApolloClient({
@@ -68,6 +69,7 @@ export const getStaticProps = async ({ params }) => {
 };
 
 function Event({ data }) {
+  const router = useRouter();
   const [eventStatus, setEventStatus] = useState({});
   const [registerPrice, setRegisterPrice] = useState("free");
   const [showCalendarDialog, setShowCalendarDialog] = useState(false);
@@ -104,6 +106,12 @@ function Event({ data }) {
       <Layout>
         <div className="event">
           <main className="event__left">
+            <Button
+              label="Go Back"
+              icon="pi pi-arrow-left"
+              className="p-button-text event__goBackButton"
+              onClick={() => router.push("/events")}
+            />
             <h1 className="event__title">{data.Event_name}</h1>
             {data?.event_tags?.map((tag, index) => (
               <Chip className="event__cardChip" key={index} label={tag.Tag_name} />
@@ -228,6 +236,10 @@ function Event({ data }) {
         }
         .event__right {
           flex: 1;
+        }
+        .event__goBackButton {
+          margin-bottom: 20px;
+          padding: 0;
         }
         .event__title {
           font-size: min(35px, 8vw);
