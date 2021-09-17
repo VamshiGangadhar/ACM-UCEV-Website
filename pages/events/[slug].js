@@ -94,7 +94,7 @@ function Event({ data }) {
         "yyyy'-'MM'-'dd p"
       )}&end=${format(new Date(data.End_time), "yyyy'-'MM'-'dd p")}&title=${data.Event_name}&description=${
         data.Mini_description
-      }timezone=+05:30`;
+      }`;
       window.open(url, "_blank");
     }
     setShowCalendarDialog(false);
@@ -203,7 +203,7 @@ function Event({ data }) {
                   <Button
                     label="Outlook Calendar"
                     icon="pi pi-microsoft"
-                    onClick={() => handleCalendarProviderClick("outlook")}
+                    onClick={() => handleCalendarProviderClick("outlookcom")}
                   />
                 </div>
               </Dialog>
