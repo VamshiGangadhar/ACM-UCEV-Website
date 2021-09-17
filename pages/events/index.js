@@ -128,7 +128,8 @@ function Events({ eventsOverview }) {
                   {filterStatus.length != 0 ? (
                     <>
                       <p className="events__noResultsDesc">
-                        No results found for "{searchEntry}". Try a different search or cancel the search below.
+                        No results found for &quot;{searchEntry}&quot;. Try a different search or cancel the search
+                        below.
                       </p>
                       <Button
                         label="Cancel Search"
