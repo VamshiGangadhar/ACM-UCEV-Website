@@ -61,7 +61,18 @@ function Navbar() {
     <>
       <Menubar
         className="nav"
-        start={<Image className="nav__acmLogo" src="/imgs/acm-logo.svg" width={200} height={75} alt="ACM logo" />}
+        start={
+          <Image
+            className="nav__acmLogo"
+            src="/imgs/acm-logo.svg"
+            width={200}
+            height={75}
+            alt="ACM logo"
+            onClick={() => {
+              router.push("/");
+            }}
+          />
+        }
         model={items}
       />
       <style jsx global>{`
@@ -77,6 +88,7 @@ function Navbar() {
         }
         .nav__acmLogo {
           width: 100% !important;
+          cursor: pointer;
         }
       `}</style>
     </>

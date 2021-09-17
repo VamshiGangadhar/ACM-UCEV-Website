@@ -255,14 +255,46 @@ function Event({ data }) {
           border-radius: 6px;
           margin-top: 20px;
         }
+        .event__description * {
+          max-width: 100%;
+        }
         .event__description p {
           line-height: 1.5;
           margin-bottom: 10px;
           color: #222222;
         }
+        .event__description h1,
+        .event__description h2,
+        .event__description h3 {
+          color: #444444;
+        }
         .event__description h1 {
           font-size: min(25px, 7vw);
-          color: #444444;
+          margin: 10px 0;
+        }
+        .event__description h2 {
+          font-size: min(20px, 6.5vw);
+          margin: 8px 0;
+        }
+        .event__description h3 {
+          font-size: min(18px, 6vw);
+          margin: 5px 0;
+        }
+        .event__description img {
+          border-radius: 6px;
+          overflow: hidden;
+        }
+        .event__description ol,
+        .event__description ul {
+          padding-left: 20px;
+        }
+        .event__description pre {
+          background-color: #222222;
+          color: #eeeeee;
+          padding: 10px;
+          border-radius: 6px;
+          line-height: 1.5;
+          font-family: "Courier New", Courier, monospace;
         }
          {
           /* EVENT MARKDOWN STYLES END */
@@ -287,10 +319,10 @@ function Event({ data }) {
           flex-direction: column;
           gap: 10px;
         }
-
         .event__sumUpDetails {
           padding: 20px;
-          border: 1px solid #e5e5e5;
+          border: 1px solid #dadada;
+          border-radius: 6px;
           position: sticky;
           top: 20px;
           transform: translateX(0);
