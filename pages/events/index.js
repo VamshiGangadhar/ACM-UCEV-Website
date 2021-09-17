@@ -79,7 +79,11 @@ function Events({ eventsOverview }) {
     if (searchEntry.trim().length > 0) {
       setResults(fuse.search(searchEntry));
     } else {
-      setResults(fuse.search("e"));
+      let newResult = [];
+      referenceEventsOverview.map((event) => {
+        newResult.push({ item: event });
+      });
+      setResults(newResult);
     }
   }, [searchEntry]);
 
