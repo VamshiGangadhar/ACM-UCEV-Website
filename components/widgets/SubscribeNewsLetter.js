@@ -79,14 +79,14 @@ function SubscribeNewsLetter() {
         }
         .subscribeNewsLetter__title {
           color: #ffffff;
-          font-size: 30px;
+          font-size: min(30px, 9vw);
           text-align: center;
         }
         .subscribeNewsLetter__desc {
           text-align: center;
           max-width: 600px;
           color: #eeeeee;
-          font-size: 17px;
+          font-size: min(17px, 4.8vw);
         }
         .subscribeNewsLetter__form {
           display: flex;

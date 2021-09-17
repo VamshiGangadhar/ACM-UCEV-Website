@@ -24,12 +24,12 @@ function AboutACM() {
           margin: 0 auto;
         }
         .aboutACM__title {
-          font-size: 30px;
+          font-size: min(30px, 9vw);
           margin-bottom: 20px;
           color: #3792c1;
         }
         .aboutACM__text {
-          font-size: min(18px, 5vw);
+          font-size: min(18px, 4.8vw);
           color: #222222;
           line-height: 1.5;
           margin-bottom: 10px;

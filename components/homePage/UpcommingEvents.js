@@ -60,7 +60,7 @@ function UpcommingEvents({ events }) {
             margin-top: 40px;
           }
           .upcommingEvents__title {
-            font-size: 30px;
+            font-size: min(30px, 9vw);
             color: #3792c8;
             margin-bottom: 20px;
           }
@@ -69,7 +69,7 @@ function UpcommingEvents({ events }) {
             padding: 40px;
           }
           .upcommingEvents__desc {
-            font-size: min(18px, 5vw);
+            font-size: min(18px, 4.8vw);
             color: #222222;
             line-height: 1.5;
             margin-bottom: 10px;
@@ -86,6 +86,9 @@ function UpcommingEvents({ events }) {
             background-color: #f5f5f5 !important;
             border: 1px solid #e0e0e0 !important;
             box-shadow: none;
+          }
+          .upcommingEvents__eventCard .p-card-title {
+            font-size: min(25px, 6.5vw) !important;
           }
           .upcommingEvents__eventCard .p-card-content {
             padding: 0;
