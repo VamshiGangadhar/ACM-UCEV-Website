@@ -1,4 +1,6 @@
 import "../styles/globals.css";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+
 import NProgress from "nprogress";
 import Head from "next/head";
 import Router from "next/router";

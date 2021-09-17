@@ -1,7 +1,9 @@
 import React from "react";
 import { Button } from "primereact/button";
+import { useRouter } from "next/router";
 
 function Hero() {
+  const router = useRouter();
   return (
     <>
       <div className="hero">
@@ -22,6 +24,9 @@ function Hero() {
             icon="pi pi-calendar"
             tooltip="Browse through events"
             tooltipOptions={{ position: "bottom" }}
+            onClick={() => {
+              router.push(`/events`);
+            }}
           />
         </div>
       </div>
