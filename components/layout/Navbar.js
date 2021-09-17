@@ -1,13 +1,17 @@
 import React from "react";
 import { Menubar } from "primereact/menubar";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 function Navbar() {
+  const router = useRouter();
   const items = [
     {
       label: "Home",
       icon: "pi pi-fw pi-home",
-      url: "/",
+      command: () => {
+        router.push("/");
+      },
     },
     {
       label: "Team",
@@ -34,6 +38,9 @@ function Navbar() {
         {
           label: "Event calender",
           icon: "pi pi-fw pi-calendar",
+          command: () => {
+            router.push("/events");
+          },
         },
         {
           label: "Achieves",
@@ -63,6 +70,7 @@ function Navbar() {
           border: none;
           border-bottom: 2px solid #e5e5e5;
           max-width: var(--max-width);
+          width: 100%;
           margin: 0 auto;
           display: flex;
           justify-content: space-between;

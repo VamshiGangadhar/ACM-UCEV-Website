@@ -4,8 +4,10 @@ import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import { format } from "date-fns";
 import { Chip } from "primereact/chip";
+import { useRouter } from "next/router";
 
 function UpcommingEvents({ events }) {
+  const router = useRouter();
   const customizedContent = (item) => {
     return (
       <Card
@@ -18,7 +20,13 @@ function UpcommingEvents({ events }) {
         ))}
 
         <p className="upcommingEvents__eventDescription">{item.Mini_description.trim()}</p>
-        <Button label="Read more" icon="pi pi-arrow-circle-right"></Button>
+        <Button
+          label="Read more"
+          icon="pi pi-arrow-circle-right"
+          onClick={() => {
+            router.push(`/events/${item.Slug}`);
+          }}
+        ></Button>
       </Card>
     );
   };

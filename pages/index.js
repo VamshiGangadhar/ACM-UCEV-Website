@@ -3,11 +3,10 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import AboutACM from "../components/homePage/AboutACM";
 import AboutChapter from "../components/homePage/AboutChapter";
 import AboutJNTUV from "../components/homePage/AboutJNTUV";
-import Footer from "../components/layout/Footer";
 import Hero from "../components/homePage/Hero";
-import Navbar from "../components/layout/Navbar";
 import SubscribeNewsLetter from "../components/widgets/SubscribeNewsLetter";
 import UpcommingEvents from "../components/homePage/UpcommingEvents";
+import Layout from "../components/layout/Layout";
 
 export const getStaticProps = async () => {
   const client = new ApolloClient({
@@ -48,27 +47,27 @@ export const getStaticProps = async () => {
 function Home({ eventsOverview, homepageAlbum }) {
   return (
     <>
-      <Navbar />
-      <Hero />
-      <div className="home__container">
-        <AboutChapter photos={homepageAlbum} />
-        <div className="home__about">
-          <AboutACM />
-          <AboutJNTUV />
+      <Layout>
+        <Hero />
+        <div className="home__container">
+          <AboutChapter photos={homepageAlbum} />
+          <div className="home__about">
+            <AboutACM />
+            <AboutJNTUV />
+          </div>
+          <div className="home__map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15165.112094766891!2d83.36691852477446!3d18.151102102001676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3bef0baf9f2a11%3A0xdb0b518115b27e07!2sJNTU%20Vizianagaram!5e0!3m2!1sen!2sin!4v1623559635361!5m2!1sen!2sin"
+              width="100%"
+              height="300"
+              style={{ border: 0 }}
+              loading="lazy"
+            />
+          </div>
+          <UpcommingEvents events={eventsOverview} />
+          <SubscribeNewsLetter />
         </div>
-        <div className="home__map">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15165.112094766891!2d83.36691852477446!3d18.151102102001676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3bef0baf9f2a11%3A0xdb0b518115b27e07!2sJNTU%20Vizianagaram!5e0!3m2!1sen!2sin!4v1623559635361!5m2!1sen!2sin"
-            width="100%"
-            height="300"
-            style={{ border: 0 }}
-            loading="lazy"
-          />
-        </div>
-        <UpcommingEvents events={eventsOverview} />
-        <SubscribeNewsLetter />
-      </div>
-      <Footer />
+      </Layout>
       <style jsx>{`
         .home__about {
           display: flex;
