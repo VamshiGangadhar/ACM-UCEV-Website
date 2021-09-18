@@ -55,6 +55,7 @@ function NoEventsFound({ filterStatus, searchEntry, setSearchEntry, setFilterSta
           max-width: 100%;
           line-height: 1.5;
           word-wrap: break-word;
+          word-break: break-all;
         }
         .noEventsFound__searchCancelBtn {
           margin-top: 20px;
