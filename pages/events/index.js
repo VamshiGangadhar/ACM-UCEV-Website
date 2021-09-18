@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../../components/layout/Layout";
 import { Message } from "primereact/message";
-import { format } from "date-fns";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { SelectButton } from "primereact/selectbutton";
-import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
-import { Chip } from "primereact/chip";
-import { useRouter } from "next/router";
 import Fuse from "fuse.js";
+import Layout from "../../components/layout/Layout";
+import EventResultCard from "../../components/eventsPage/EventResultCard";
+import NoEventsFound from "../../components/eventsPage/NoEventsFound";
 
 export const getStaticProps = async () => {
   const client = new ApolloClient({
@@ -50,7 +48,6 @@ export const getStaticProps = async () => {
   };
 };
 function Events({ eventsOverview }) {
-  const router = useRouter();
   const [referenceEventsOverview, setReferenceEventsOverview] = useState(eventsOverview);
   const [filterStatus, setFilterStatus] = useState(["upcoming", "ongoing"]);
   const [searchEntry, setSearchEntry] = useState("");
@@ -95,63 +92,25 @@ function Events({ eventsOverview }) {
             <h1 className="events__upcomingTitle">Events</h1>
             {results.length != 0 ? (
               results?.map((event) => (
-                <div key={event.item.Slug} className="events__event">
-                  <Message severity={event.item.event_status.severity} text={event.item.event_status.text} />
-                  <h2 className="events__eventTitle">{event.item.Event_name}</h2>
-                  {event.item.event_tags.map((tag, index) => (
-                    <Chip className="events__cardChip" key={index} label={tag.Tag_name} />
-                  ))}
-                  <p className="events__miniDescription">{event.item.Mini_description}</p>
-                  <p className="events__eventTimings">
-                    <span className="events__startTime">
-                      {format(new Date(event.item.Start_time), "do MMM yyyy HH:mm bbb")}
-                    </span>
-                    <i className="pi pi-arrow-circle-right" />
-                    <span className="events__endTime">
-                      {format(new Date(event.item.End_time), "do MMM yyyy HH:mm bbb")}
-                    </span>
-                  </p>
-                  <Button
-                    label="Read more"
-                    icon="pi pi-arrow-circle-right"
-                    onClick={() => {
-                      router.push(`/events/${event.item.Slug}`);
-                    }}
-                  ></Button>
-                </div>
+                <EventResultCard
+                  key={event.item.Slug}
+                  slug={event.item.Slug}
+                  event_status={event.item.event_status}
+                  event_name={event.item.Event_name}
+                  event_tags={event.item.event_tags}
+                  mini_description={event.item.Mini_description}
+                  start_time={event.item.Start_time}
+                  end_time={event.item.End_time}
+                />
               ))
             ) : (
-              <div className="events__noResults">
-                <img className="events__noResultsimg" src="/imgs/results-not-found.svg" alt="upcoming events" />
-                <div className="events_noResultsContent">
-                  <h2 className="events__noResultsTitle">No results found</h2>
-                  {filterStatus.length != 0 ? (
-                    <>
-                      <p className="events__noResultsDesc">
-                        No results found for &quot;{searchEntry}&quot;. Try a different search or cancel the search
-                        below.
-                      </p>
-                      <Button
-                        label="Cancel Search"
-                        className="events__noResultsCancel"
-                        onClick={() => setSearchEntry("")}
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <p className="events__noResultsDesc">
-                        You need to select at least one event status to filter the results. Try selecting more statuses
-                        or click the button below to reset filters
-                      </p>
-                      <Button
-                        label="Reset Filters"
-                        className="events__noResultsCancel"
-                        onClick={() => setFilterStatus(["upcoming", "ongoing", "completed"])}
-                      />
-                    </>
-                  )}
-                </div>
-              </div>
+              //code
+              <NoEventsFound
+                filterStatus={filterStatus}
+                searchEntry={searchEntry}
+                setSearchEntry={setSearchEntry}
+                setFilterStatus={setFilterStatus}
+              />
             )}
           </div>
           <div className="events__right">
@@ -212,8 +171,8 @@ function Events({ eventsOverview }) {
           margin: 20px auto;
           display: flex;
           justify-content: space-around;
-          padding: 20px;
           gap: 20px;
+          padding: 20px;
         }
         .events__left {
           flex: 2;
@@ -235,74 +194,7 @@ function Events({ eventsOverview }) {
         .events__filterSearchTitle {
           margin-top: 20px;
         }
-        .events__cardChip {
-          margin-bottom: 10px;
-        }
-        .events__eventTimings {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          margin-bottom: 20px;
-        }
-        .events__startTime,
-        .events__endTime {
-          border: 1px solid #c4c4c4;
-          padding: 5px;
-          border-radius: 3px;
-          background-color: #ddd;
-          font-size: min(14px, 4vw);
-          color: #444444;
-          display: block;
-        }
-        .events__noResults {
-          display: flex;
-          align-items: center;
-          gap: 20px;
-          border: 1px solid #ddd;
-          padding: 20px;
-          border-radius: 6px;
-          max-width: min(100%, 700px);
-          background-color: #eeeeee;
-        }
-        .events__noResultsTitle {
-          font-size: min(30px, 8vw);
-          color: #444444;
-          margin-bottom: 20px;
-        }
-        .events__noResultsDesc {
-          max-width: 100%;
-          line-height: 1.5;
-          word-wrap: break-word;
-        }
-        .events__noResultsCancel {
-          margin-top: 20px;
-        }
-        .events__noResultsimg {
-          max-width: min(300px, 70vw);
-          display: block;
-          margin: 0 auto;
-        }
-        .events__event {
-          background-color: #eeeeee;
-          border-radius: 6px;
-          border: 1px solid #cccccc;
-          padding: 20px;
-          max-width: min(100%, 700px);
-          white-space: break-word;
-          overflow: hidden;
-          margin-bottom: 20px;
-        }
-        .events__eventTitle {
-          font-size: min(20px, 6vw);
-          color: #333333;
-          margin: 10px 0;
-        }
-        .events__miniDescription {
-          font-size: min(16px, 4.8vw);
-          margin-bottom: 10px;
-          line-height: 1.5;
-          color: #222222;
-        }
+
         .events__filterSection {
           position: sticky;
           top: 20px;
@@ -319,27 +211,13 @@ function Events({ eventsOverview }) {
         @media only screen and (max-width: 800px) {
           .events {
             flex-direction: column;
+            padding: 0;
           }
           .events__right {
             order: 0;
           }
           .events__left {
             order: 1;
-          }
-          .events__event {
-            width: 90vw;
-            margin: 10px auto;
-          }
-          .events__noResults {
-            flex-direction: column;
-          }
-          .events_noResultsContent {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            max-width: 400px;
-            text-align: center;
           }
           .events__filterByStatus,
           .events__filtersTitle {
