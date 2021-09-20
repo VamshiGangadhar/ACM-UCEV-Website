@@ -73,6 +73,10 @@ function Events({ eventsOverview }) {
   }, [filterStatus]);
 
   useEffect(() => {
+    setFilterStatus(["upcoming", "ongoing"]);
+  }, []);
+
+  useEffect(() => {
     if (searchEntry.trim().length > 0) {
       setResults(fuse.search(searchEntry));
     } else {
@@ -131,8 +135,8 @@ function Events({ eventsOverview }) {
                   value={filterStatus}
                   options={[
                     { name: "Completed", value: "completed" },
-                    { name: "Upcoming", value: "upcoming" },
                     { name: "Ongoing", value: "ongoing" },
+                    { name: "Upcoming", value: "upcoming" },
                   ]}
                   onChange={(e) => setFilterStatus(e.value)}
                   optionLabel="name"
@@ -183,7 +187,7 @@ function Events({ eventsOverview }) {
         .events__upcomingTitle,
         .events__filtersTitle {
           font-size: min(30px, 8vw);
-          margin: 20px 0;
+          margin: 20px auto;
         }
         .events__filterStatusTitle,
         .events__filterSearchTitle {

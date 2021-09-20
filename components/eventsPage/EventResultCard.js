@@ -35,8 +35,9 @@ function EventResultCard({ slug, event_status, event_name, event_tags, mini_desc
           background-color: #eeeeee;
           border-radius: 6px;
           border: 1px solid #cccccc;
+          margin: 0 auto;
           padding: 20px;
-          max-width: min(100%, 700px);
+          max-width: min(90vw, 700px);
           white-space: break-word;
           overflow: hidden;
           margin-bottom: 20px;

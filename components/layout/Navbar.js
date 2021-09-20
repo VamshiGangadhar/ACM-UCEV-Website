@@ -20,10 +20,16 @@ function Navbar() {
         {
           label: "Faculty Incharge",
           icon: "pi pi-fw pi-book",
+          command: () => {
+            router.push("/team/faculty-incharge");
+          },
         },
         {
           label: "Our Team",
           icon: "pi pi-fw pi-users",
+          command: () => {
+            router.push("/team/our-team");
+          },
         },
       ],
     },
@@ -36,15 +42,18 @@ function Navbar() {
       icon: "pi pi-fw pi-calendar",
       items: [
         {
-          label: "Event calender",
+          label: "Events",
           icon: "pi pi-fw pi-calendar",
           command: () => {
             router.push("/events");
           },
         },
         {
-          label: "Achieves",
+          label: "Events Calendar",
           icon: "pi pi-fw pi-calendar-times",
+          command: () => {
+            router.push("/events/event-calendar");
+          },
         },
       ],
     },

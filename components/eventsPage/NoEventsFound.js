@@ -43,25 +43,26 @@ function NoEventsFound({ filterStatus, searchEntry, setSearchEntry, setFilterSta
           border: 1px solid #ddd;
           padding: 20px;
           border-radius: 6px;
-          max-width: min(100%, 700px);
+          margin: 0 auto;
+          max-width: min(90vw, 700px);
           background-color: #eeeeee;
         }
         .noEventsFound__MainMessage {
           font-size: min(30px, 8vw);
           color: #444444;
           margin-bottom: 20px;
+          flex: 1;
         }
         .noEventsFound__DetailedMessage {
           max-width: 100%;
           line-height: 1.5;
           word-wrap: break-word;
           word-break: break-all;
-        }
-        .noEventsFound__searchCancelBtn {
-          margin-top: 20px;
+          margin-bottom: 20px;
         }
         .noEventsFound__Illustration {
           max-width: min(300px, 70vw);
+          width: 50%;
           display: block;
           margin: 0 auto;
         }
@@ -76,6 +77,10 @@ function NoEventsFound({ filterStatus, searchEntry, setSearchEntry, setFilterSta
             align-items: center;
             max-width: 400px;
             text-align: center;
+          }
+          .noEventsFound__Illustration {
+            max-width: min(300px, 70vw);
+            width: unset;
           }
         }
       `}</style>
