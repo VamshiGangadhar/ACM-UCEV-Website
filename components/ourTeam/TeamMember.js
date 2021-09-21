@@ -21,7 +21,7 @@ function TeamMember({ memberName, memberPosition, memberPositionColor, memberIma
           </div>
           <div className="teamMember__socials">
             {memberSocial.map((social, index) => (
-              <Button label={social.Name_of_social} icon="pi pi pi-link" className="p-button-secondary" />
+              <Button key={index} label={social.Name_of_social} icon="pi pi pi-link" className="p-button-secondary" />
             ))}
           </div>
         </div>
