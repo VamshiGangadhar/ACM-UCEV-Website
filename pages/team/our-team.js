@@ -51,17 +51,19 @@ function ourTeam({ teamMembers }) {
             </div>
           </div>
           <div className="ourTeam__allMembers">
-            {teamMembers.map((member, index) => (
-              <TeamMember
-                key={index}
-                memberPositionColor={paleColors[Math.floor(index % paleColors.length)]}
-                memberName={member.Member_name}
-                memberPosition={member.Member_position}
-                memberImage={member.Member_image}
-                memberAbout={member.About_member}
-                memberSocial={member.Social_links}
-              />
-            ))}
+            {teamMembers.map((member, index) => {
+              return (
+                <TeamMember
+                  key={index}
+                  memberPositionColor={paleColors[index <= paleColors.length ? index : index % paleColors.length]}
+                  memberName={member.Member_name}
+                  memberPosition={member.Member_position}
+                  memberImage={member.Member_image}
+                  memberAbout={member.About_member}
+                  memberSocial={member.Social_links}
+                />
+              );
+            })}
           </div>
         </div>
       </Layout>
