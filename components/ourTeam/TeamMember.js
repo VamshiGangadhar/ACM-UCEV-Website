@@ -21,7 +21,15 @@ function TeamMember({ memberName, memberPosition, memberPositionColor, memberIma
           </div>
           <div className="teamMember__socials">
             {memberSocial.map((social, index) => (
-              <Button key={index} label={social.Name_of_social} icon="pi pi pi-link" className="p-button-secondary" />
+              <Button
+                key={index}
+                label={social.Name_of_social}
+                icon="pi pi pi-link"
+                tooltipOptions={{ position: "bottom" }}
+                tooltip="opens in new tab"
+                className="p-button-secondary"
+                onClick={() => window.open(social.Social_url, "_blank")}
+              />
             ))}
           </div>
         </div>
