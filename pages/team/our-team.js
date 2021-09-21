@@ -1,7 +1,39 @@
 import React from "react";
 import Layout from "../../components/layout/Layout";
 import Image from "next/image";
-function ourTeam() {
+import TeamMember from "../../components/ourTeam/TeamMember";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+export const getStaticProps = async () => {
+  const client = new ApolloClient({
+    uri: process.env.BACKEND_GRAPHQL_ENDPOINT,
+    cache: new InMemoryCache(),
+  });
+  const { data } = await client.query({
+    query: gql`
+      {
+        ourTeams {
+          Member_name
+          Member_position
+          Member_image {
+            url
+          }
+          About_member
+          Social_links {
+            Name_of_social
+            Social_url
+          }
+        }
+      }
+    `,
+  });
+  return {
+    props: {
+      teamMembers: data.ourTeams,
+    },
+  };
+};
+function ourTeam({ teamMembers }) {
+  const paleColors = ["#0EA47A", "#CD5D7D", "#3D6271", "#0C81F6", "#506E86", "#FAB95B", "#F05454"];
   return (
     <>
       <Layout>
@@ -18,6 +50,19 @@ function ourTeam() {
               </p>
             </div>
           </div>
+          <div className="ourTeam__allMembers">
+            {teamMembers.map((member, index) => (
+              <TeamMember
+                key={index}
+                memberPositionColor={paleColors[Math.floor(index % paleColors.length)]}
+                memberName={member.Member_name}
+                memberPosition={member.Member_position}
+                memberImage={member.Member_image}
+                memberAbout={member.About_member}
+                memberSocial={member.Social_links}
+              />
+            ))}
+          </div>
         </div>
       </Layout>
       <style jsx>{`
@@ -30,6 +75,8 @@ function ourTeam() {
         .ourTeam__hero {
           display: flex;
           justify-content: center;
+          flex-wrap: wrap;
+          padding: 20px;
           align-items: center;
           gap: 20px;
           margin: 0 auto;
@@ -45,6 +92,20 @@ function ourTeam() {
         }
         .ourTeam__illustration {
           height: 200px;
+        }
+        .ourTeam__allMembers {
+          margin: 50px auto;
+          max-width: 1000px;
+          overflow: hidden;
+          padding: 20px;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          grid-gap: 30px;
+        }
+        @media only screen and (max-width: 400px) {
+          .ourTeam__allMembers {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          }
         }
       `}</style>
     </>
