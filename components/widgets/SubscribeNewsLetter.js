@@ -3,6 +3,7 @@ import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { Messages } from "primereact/messages";
+import jsonp from "jsonp";
 
 function SubscribeNewsLetter() {
   let toast = React.useRef(null);
@@ -10,22 +11,60 @@ function SubscribeNewsLetter() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+
   let handleNewsLetterSubmit = (e) => {
     e.preventDefault();
-    setEmail("");
-    setName("");
-    setSubscribed(true);
-    toast.current.show({
-      severity: "success",
-      summary: "Subscribed",
-      detail: "You will get notifications to your email inbox",
-    });
-    messages.current.show({
-      severity: "success",
-      detail: "You will get notifications to your email inbox",
-      sticky: true,
-      closable: false,
-    });
+    const formData = {
+      EMAIL: email,
+      NAME: name,
+    };
+
+    //SEND FORM DATA TO MAILCHIMP
+    const MailChimpAddr = "https://gmail.us5.list-manage.com";
+    const MailChimpU = "53186649dcb49281b384e3fa4";
+    const MailChimpID = "3b1d90b827";
+    const queryString = (data) => {
+      return Object.keys(data)
+        .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+        .join("&");
+    };
+    jsonp(
+      `${MailChimpAddr}/subscribe/post-json?u=${MailChimpU}&amp;id=${MailChimpID}&${queryString(formData)}`,
+      { param: "c" },
+      (err, data) => {
+        if (err) {
+          setEmail("");
+          setName("");
+          setSubscribed(true);
+          toast.current.show({
+            severity: "error",
+            summary: err.result,
+            detail: err.msg,
+          });
+          messages.current.show({
+            severity: "error",
+            detail: "There was an error. Please try again later after some time",
+            sticky: true,
+            closable: false,
+          });
+        } else {
+          setEmail("");
+          setName("");
+          setSubscribed(true);
+          toast.current.show({
+            severity: "success",
+            summary: data.result,
+            detail: data.msg,
+          });
+          messages.current.show({
+            severity: "success",
+            detail: "You will get notifications to your email inbox",
+            sticky: true,
+            closable: false,
+          });
+        }
+      }
+    );
   };
   return (
     <>
