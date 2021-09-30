@@ -49,13 +49,17 @@ export const getStaticProps = async () => {
 };
 function Events({ eventsOverview }) {
   const [referenceEventsOverview, setReferenceEventsOverview] = useState(eventsOverview);
-  const [filterStatus, setFilterStatus] = useState(["upcoming", "ongoing"]);
+  const [filterStatus, setFilterStatus] = useState([]);
   const [searchEntry, setSearchEntry] = useState("");
   const [results, setResults] = useState([]);
 
   let fuse = new Fuse(referenceEventsOverview, {
     keys: ["Event_name", "Mini_description", "event_tags.Tag_name", "event_status.text"],
   });
+
+  useEffect(() => {
+    setFilterStatus(["upcoming", "ongoing", "completed"]);
+  }, []);
 
   useEffect(() => {
     let updatedEventsOverview = eventsOverview.filter((event) => {
@@ -71,10 +75,6 @@ function Events({ eventsOverview }) {
     });
     setResults(newResult);
   }, [filterStatus]);
-
-  useEffect(() => {
-    setFilterStatus(["upcoming", "ongoing"]);
-  }, []);
 
   useEffect(() => {
     if (searchEntry.trim().length > 0) {
@@ -93,29 +93,72 @@ function Events({ eventsOverview }) {
       <Layout>
         <div className="events">
           <div className="events__left">
-            <h1 className="events__upcomingTitle">Events</h1>
-            {results.length != 0 ? (
-              results?.map((event) => (
-                <EventResultCard
-                  key={event.item.Slug}
-                  slug={event.item.Slug}
-                  event_status={event.item.event_status}
-                  event_name={event.item.Event_name}
-                  event_tags={event.item.event_tags}
-                  mini_description={event.item.Mini_description}
-                  start_time={event.item.Start_time}
-                  end_time={event.item.End_time}
-                />
-              ))
-            ) : (
-              //code
+            <h1 className="events__title">Events</h1>
+            {/* #####################NO RESULTS FOUND##################### */}
+            {filterStatus.length === 0 || (searchEntry != "" && results.length === 0) ? (
               <NoEventsFound
                 filterStatus={filterStatus}
                 searchEntry={searchEntry}
                 setSearchEntry={setSearchEntry}
                 setFilterStatus={setFilterStatus}
               />
-            )}
+            ) : null}
+            {/* #####################UPCOMING EVENTS###################### */}
+            {filterStatus.includes("upcoming") && results.length != 0 ? (
+              <>
+                {results?.map(
+                  (event) =>
+                    event.item.event_status.text == "upcoming" && (
+                      <EventResultCard
+                        key={event.item.Slug}
+                        slug={event.item.Slug}
+                        event_status={event.item.event_status}
+                        event_name={event.item.Event_name}
+                        event_tags={event.item.event_tags}
+                        mini_description={event.item.Mini_description}
+                        start_time={event.item.Start_time}
+                        end_time={event.item.End_time}
+                      />
+                    )
+                )}
+              </>
+            ) : null}
+            {/* #####################ONGOING EVENTS###################### */}
+            {filterStatus.includes("ongoing") && results.length != 0
+              ? results?.map(
+                  (event) =>
+                    event.item.event_status.text == "ongoing" && (
+                      <EventResultCard
+                        key={event.item.Slug}
+                        slug={event.item.Slug}
+                        event_status={event.item.event_status}
+                        event_name={event.item.Event_name}
+                        event_tags={event.item.event_tags}
+                        mini_description={event.item.Mini_description}
+                        start_time={event.item.Start_time}
+                        end_time={event.item.End_time}
+                      />
+                    )
+                )
+              : null}
+            {/* #####################COMPLETED EVENTS###################### */}
+            {filterStatus.includes("completed") && results.length != 0
+              ? results?.map(
+                  (event) =>
+                    event.item.event_status.text == "completed" && (
+                      <EventResultCard
+                        key={event.item.Slug}
+                        slug={event.item.Slug}
+                        event_status={event.item.event_status}
+                        event_name={event.item.Event_name}
+                        event_tags={event.item.event_tags}
+                        mini_description={event.item.Mini_description}
+                        start_time={event.item.Start_time}
+                        end_time={event.item.End_time}
+                      />
+                    )
+                )
+              : null}
           </div>
           <div className="events__right">
             <div className="events__filterSection">
@@ -124,13 +167,11 @@ function Events({ eventsOverview }) {
                 <h3 className="events__filterStatusTitle">Filter by Status</h3>
                 {filterStatus.length == 0 ? (
                   <Message
-                    style={{ marginBottom: "10px" }}
+                    className="events__filterStatusWarnMsg"
                     severity="error"
                     text="Select at least one status to get results"
                   />
-                ) : (
-                  <></>
-                )}
+                ) : null}
                 <SelectButton
                   value={filterStatus}
                   options={[
@@ -151,9 +192,7 @@ function Events({ eventsOverview }) {
                     severity="warn"
                     text={`searching only events with status ${filterStatus.join(", ")}`}
                   />
-                ) : (
-                  <></>
-                )}
+                ) : null}
                 <span className="p-input-icon-left">
                   <i className="pi pi-search" />
                   <InputText
@@ -174,8 +213,8 @@ function Events({ eventsOverview }) {
           max-width: 1200px;
           margin: 20px auto;
           display: flex;
-          justify-content: space-around;
-          gap: 20px;
+          justify-content: space-between;
+          gap: 30px;
           padding: 20px;
         }
         .events__left {
@@ -184,7 +223,7 @@ function Events({ eventsOverview }) {
         .events__right {
           flex: 1;
         }
-        .events__upcomingTitle,
+        .events__title,
         .events__filtersTitle {
           font-size: min(30px, 8vw);
           margin: 20px auto;
@@ -200,25 +239,31 @@ function Events({ eventsOverview }) {
         }
 
         .events__filterSection {
+          width: min(320px, 90vw);
           position: sticky;
           top: 20px;
           transform: translateX(0);
           max-height: 80vh;
         }
         .events__searchInput {
-          width: min(310px, 90vw);
+          width: min(320px, 90vw);
+        }
+        .events__filterStatusWarnMsg {
+          margin-bottom: 10px;
         }
         .events__filterSearchWarnMsg {
-          width: min(310px, 90vw);
+          width: min(320px, 90vw);
           border-bottom: 10px solid #fff !important;
         }
         @media only screen and (max-width: 800px) {
           .events {
             flex-direction: column;
             padding: 0;
+            gap: 5px;
           }
           .events__right {
             order: 0;
+            width: 100%;
           }
           .events__left {
             order: 1;

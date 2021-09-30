@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "primereact/button";
-
+import truncateString from "../../utils/truncateString";
 function NoEventsFound({ filterStatus, searchEntry, setSearchEntry, setFilterStatus }) {
   return (
     <>
@@ -11,7 +11,8 @@ function NoEventsFound({ filterStatus, searchEntry, setSearchEntry, setFilterSta
           {filterStatus.length != 0 ? (
             <>
               <p className="noEventsFound__DetailedMessage">
-                No results found for &quot;{searchEntry}&quot;. Try a different search or cancel the search below.
+                No results found for &quot;{truncateString(searchEntry, 100)}&quot;. Try a different search or cancel
+                the search below.
               </p>
               <Button
                 label="Cancel Search"
@@ -21,7 +22,7 @@ function NoEventsFound({ filterStatus, searchEntry, setSearchEntry, setFilterSta
             </>
           ) : (
             <>
-              <p className="noEventsFound__DetailedMessage">
+              <p className="noEventsFound__StatusFilterDetailedMessage">
                 You need to select at least one event status to filter the results. Try selecting more statuses or click
                 the button below to reset filters
               </p>
@@ -53,12 +54,15 @@ function NoEventsFound({ filterStatus, searchEntry, setSearchEntry, setFilterSta
           margin-bottom: 20px;
           flex: 1;
         }
-        .noEventsFound__DetailedMessage {
+        .noEventsFound__DetailedMessage,
+        .noEventsFound__StatusFilterDetailedMessage {
           max-width: 100%;
           line-height: 1.5;
+          margin-bottom: 20px;
+        }
+        .noEventsFound__DetailedMessage {
           word-wrap: break-word;
           word-break: break-all;
-          margin-bottom: 20px;
         }
         .noEventsFound__Illustration {
           max-width: min(300px, 70vw);
