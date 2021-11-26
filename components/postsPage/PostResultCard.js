@@ -6,7 +6,7 @@ import Image from "next/image";
 import truncateString from "../../utils/truncateString";
 import readingTime from "../../utils/readingTime";
 
-function postResultCard({
+function PostResultCard({
   slug,
   title,
   cover_image,
@@ -28,7 +28,7 @@ function postResultCard({
             ))}
           </div>
           <h2
-            tabindex="0"
+            tabIndex="0"
             className="postResultCard_title"
             onClick={() => {
               router.push(`/blog/${slug}`);
@@ -136,4 +136,4 @@ function postResultCard({
   );
 }
 
-export default postResultCard;
+export default PostResultCard;

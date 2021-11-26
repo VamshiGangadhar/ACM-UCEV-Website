@@ -54,6 +54,7 @@ function blogIndex({ postsOverview }) {
         <div className="blogIndex">
           {postsOverview.map((post) => (
             <PostResultCard
+              key={post.id}
               slug={post.Slug}
               title={post.Title}
               cover_image={post.Cover_image.url}
