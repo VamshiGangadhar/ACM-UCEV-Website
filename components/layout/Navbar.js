@@ -58,8 +58,11 @@ function Navbar() {
       ],
     },
     {
-      label: "Gallery",
-      icon: "pi pi-fw pi-images",
+      label: "Blog",
+      icon: "pi pi-fw pi-book",
+      command: () => {
+        router.push("/blog");
+      },
     },
     {
       label: "Contact",
