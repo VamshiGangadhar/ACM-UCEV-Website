@@ -175,10 +175,7 @@ function Event({ data }) {
           border-radius: 6px;
           overflow: hidden;
         }
-
-         {
-          /* EVENT MARKDOWN STYLES START */
-        }
+        /* EVENT MARKDOWN STYLES START */
         .event__description {
           background-color: #eeeeee;
           padding: 20px;
@@ -228,10 +225,7 @@ function Event({ data }) {
           font-family: "Courier New", Courier, monospace;
           white-space: break-spaces;
         }
-         {
-          /* EVENT MARKDOWN STYLES END */
-        }
-
+        /* EVENT MARKDOWN STYLES END */
         .event__registerSection {
           margin: 20px 0;
         }
