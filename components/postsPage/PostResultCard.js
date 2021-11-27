@@ -46,9 +46,6 @@ function PostResultCard({
                   className="postResultCard__authorImg"
                   width={30}
                   height={30}
-                  onClick={() => {
-                    router.push(`/blog/${slug}`);
-                  }}
                 />
                 <div className="postResultCard__authorName">
                   {author.Author_name}
@@ -84,6 +81,9 @@ function PostResultCard({
             alt={title}
             layout="fill"
             objectFit="cover"
+            onClick={() => {
+              router.push(`/blog/${slug}`);
+            }}
           />
         </div>
       </div>
