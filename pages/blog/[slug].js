@@ -221,6 +221,8 @@ function BlogPost({ data }) {
           }
           .blogPost__coverImg img {
             border-radius: 6px;
+            display: block;
+            margin: 0 auto;
           }
           /* post MARKDOWN STYLES START */
           .post__description {
@@ -258,6 +260,9 @@ function BlogPost({ data }) {
             margin-bottom: 10px;
           }
           .post__description img {
+            display: block;
+            margin: 0 auto;
+            max-height: 500px;
             border-radius: 6px;
             overflow: hidden;
           }
@@ -275,6 +280,7 @@ function BlogPost({ data }) {
             white-space: normal;
           }
           .post__description code {
+            word-break: break-word;
             background-color: #eee;
             font-family: monospace;
             color: #f73838;
@@ -283,7 +289,6 @@ function BlogPost({ data }) {
             border-radius: 4px;
             font-weight: 500;
           }
-
           /* post MARKDOWN STYLES END */
           .blogPost__comments {
             margin-top: 0;
