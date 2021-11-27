@@ -9,6 +9,7 @@ import { Chip } from "primereact/chip";
 import { Button } from "primereact/button";
 import { useRouter } from "next/router";
 import ReactUtterences from "react-utterances";
+import CodeBlock from "../../components/singlePostPage/CodeBlock";
 
 export const getStaticPaths = async () => {
   const client = new ApolloClient({
@@ -136,7 +137,7 @@ function BlogPost({ data }) {
           <div className="blogPost__coverImg">
             <Image src={data.Cover_image.url} layout="fill" objectFit="cover" />
           </div>
-          <ReactMarkdown className="post__description">
+          <ReactMarkdown className="post__description" components={CodeBlock}>
             {data.Description}
           </ReactMarkdown>
         </article>
@@ -156,6 +157,9 @@ function BlogPost({ data }) {
             max-width: 900px;
             margin: 20px auto;
             padding: 0 20px;
+          }
+          .blogPost {
+            margin-top: 40px;
           }
           .blogPost__goBackButton {
             margin-bottom: 20px;
@@ -228,9 +232,9 @@ function BlogPost({ data }) {
             max-width: 100%;
           }
           .post__description p {
-            font-size: 18px;
+            font-size: min(18px, 4.8vw);
             line-height: 27px;
-            margin-bottom: 10px;
+            margin: 10px 0;
             color: #222222;
           }
           .post__description h1,
@@ -266,18 +270,9 @@ function BlogPost({ data }) {
             font-size: 18px;
             line-height: 27px;
           }
-          .post__description pre {
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #2e2e2e;
-            border-radius: 4px;
-            line-height: 1.5;
-            font-family: monospace;
-            white-space: break-spaces;
-          }
           .post__description pre code {
-            background-color: #2e2e2e;
-            color: #eeeeee;
+            background-color: inherit;
+            white-space: normal;
           }
           .post__description code {
             background-color: #eee;
