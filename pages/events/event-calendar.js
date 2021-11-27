@@ -6,6 +6,7 @@ import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
 import Layout from "../../components/layout/Layout";
+import { useRouter } from "next/router";
 const locales = {
   "en-US": require("date-fns/locale/en-US"),
 };
@@ -28,6 +29,7 @@ export const getStaticProps = async () => {
         events(sort: "Start_time:asc") {
           Event_name
           Start_time
+          Slug
           End_time
         }
       }
@@ -37,6 +39,7 @@ export const getStaticProps = async () => {
   data.events.map((event) => {
     allEvents.push({
       title: event.Event_name,
+      url: event.Slug,
       start: event.Start_time,
       end: event.End_time,
     });
@@ -47,7 +50,8 @@ export const getStaticProps = async () => {
     },
   };
 };
-function eventCalendar({ events }) {
+function EventCalendar({ events }) {
+  let router = useRouter();
   return (
     <>
       <Layout>
@@ -59,6 +63,9 @@ function eventCalendar({ events }) {
               event.end = new Date(event.end);
               return event;
             })}
+            onSelectEvent={(event) => {
+              router.push(`${event.url}`);
+            }}
             startAccessor="start"
             endAccessor="end"
             style={{ height: 500 }}
@@ -79,4 +86,4 @@ function eventCalendar({ events }) {
   );
 }
 
-export default eventCalendar;
+export default EventCalendar;

@@ -5,6 +5,7 @@ import { Chip } from "primereact/chip";
 import Image from "next/image";
 import truncateString from "../../utils/truncateString";
 import readingTime from "../../utils/readingTime";
+import Link from "next/link";
 
 function PostResultCard({
   slug,
@@ -31,26 +32,36 @@ function PostResultCard({
               />
             ))}
           </div>
-          <h2
-            tabIndex="0"
-            className="postResultCard_title"
+          <h2 className="postResultCard_title">
+            <Link href={`/blog/${slug}`}>
+              <a>{title}</a>
+            </Link>
+          </h2>
+          <div className="postResultCard_authorsContainer">
+            {authors.map((author) => (
+              <div className="postResultCard__authorChip" key={author.id}>
+                <Image
+                  src={author.Author_image.url}
+                  alt={author.Author_name}
+                  className="postResultCard__authorImg"
+                  width={30}
+                  height={30}
+                  onClick={() => {
+                    router.push(`/blog/${slug}`);
+                  }}
+                />
+                <div className="postResultCard__authorName">
+                  {author.Author_name}
+                </div>
+              </div>
+            ))}
+          </div>
+          <p
+            className="postResultCard_desc"
             onClick={() => {
               router.push(`/blog/${slug}`);
             }}
           >
-            {title}
-          </h2>
-          <div className="postResultCard_authorsContainer">
-            {authors.map((author, index) => (
-              <Chip
-                key={author.id}
-                label={author.Author_name}
-                image={author.Author_image.url}
-                className="p-mr-2 p-mb-2 postResultCard_authorChip"
-              />
-            ))}
-          </div>
-          <p className="postResultCard_desc">
             {truncateString(mini_description, 100)}
           </p>
           <div className="postResultCard_dateContainer">
@@ -97,6 +108,7 @@ function PostResultCard({
           width: 350px;
           height: 200px;
           background-color: #555;
+          cursor: pointer;
         }
         .postResultCard__content {
           flex: 3;
@@ -107,7 +119,8 @@ function PostResultCard({
           color: #333333;
           margin: 10px 0;
         }
-        .postResultCard_title:focus {
+        .postResultCard_title a:focus {
+          outline: none;
           text-decoration: underline;
           color: #555555;
         }
@@ -116,6 +129,7 @@ function PostResultCard({
           margin-bottom: 10px;
           line-height: 1.5;
           color: #222222;
+          cursor: pointer;
         }
         .postResultCard_tagsContainer,
         .postResultCard_authorsContainer {
@@ -125,8 +139,15 @@ function PostResultCard({
           margin-bottom: 10px;
           gap: 10px;
         }
-        .postResultCard_authorChip {
-          background-color: transparent;
+        .postResultCard__authorChip {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: min(15px, 3.8vw);
+          color: #555555;
+        }
+        .postResultCard__authorImg {
+          border-radius: 50%;
         }
         .postResultCard_tag {
           font-size: min(12px, 3.2vw);
