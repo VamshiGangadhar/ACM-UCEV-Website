@@ -297,6 +297,9 @@ function BlogPost({ data }) {
             font-size: 18px;
             line-height: 27px;
           }
+          .post__description pre {
+            font-size: min(15px, 3.8vw);
+          }
           .post__description pre code {
             background-color: inherit;
             white-space: normal;
@@ -306,7 +309,6 @@ function BlogPost({ data }) {
             background-color: #eee;
             font-family: monospace;
             color: #f73838;
-            font-size: 15px;
             padding: 2px 4px;
             border-radius: 4px;
             font-weight: 500;
