@@ -308,6 +308,7 @@ function BlogPost({ data }) {
             word-break: break-word;
             background-color: #eee;
             font-family: monospace;
+            font-size: min(15px, 3.8vw);
             color: #f73838;
             padding: 2px 4px;
             border-radius: 4px;
