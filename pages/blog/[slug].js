@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown";
 import { Chip } from "primereact/chip";
 import { Button } from "primereact/button";
 import { useRouter } from "next/router";
+import ReactUtterences from "react-utterances";
 
 export const getStaticPaths = async () => {
   const client = new ApolloClient({
@@ -139,14 +140,22 @@ function BlogPost({ data }) {
             {data.Description}
           </ReactMarkdown>
         </article>
+        <div className="blogPost__comments">
+          <h2>Comments</h2>
+          <ReactUtterences
+            repo="Royal-lobster/acmucev-comments"
+            type={"pathname"}
+          />
+        </div>
       </Layout>
       <style jsx global>
         {`
-          .blogPost {
+          .blogPost,
+          .blogPost__comments {
             width: 100%;
             max-width: 900px;
             margin: 20px auto;
-            padding: 20px;
+            padding: 0 20px;
           }
           .blogPost__goBackButton {
             margin-bottom: 20px;
@@ -258,6 +267,18 @@ function BlogPost({ data }) {
             white-space: break-spaces;
           }
           /* post MARKDOWN STYLES END */
+          .blogPost__comments {
+            margin-top: 0;
+          }
+          .blogPost__comments h2 {
+            font-size: min(20px, 6.5vw);
+            border-top: 1px solid #eeeeee;
+            border-bottom: 1px solid #eeeeee;
+            padding: 20px 0;
+          }
+          .utterances {
+            max-width: 900px;
+          }
           @media only screen and (max-width: 600px) {
             .blogPost__coverImg {
               width: 100%;
