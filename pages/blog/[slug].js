@@ -228,7 +228,8 @@ function BlogPost({ data }) {
             max-width: 100%;
           }
           .post__description p {
-            line-height: 1.5;
+            font-size: 18px;
+            line-height: 27px;
             margin-bottom: 10px;
             color: #222222;
           }
@@ -238,16 +239,19 @@ function BlogPost({ data }) {
             color: #444444;
           }
           .post__description h1 {
-            font-size: min(25px, 7vw);
-            margin: 10px 0;
+            font-size: min(28px, 7vw);
+            margin-top: 25px;
+            margin-bottom: 20px;
           }
           .post__description h2 {
-            font-size: min(20px, 6.5vw);
-            margin: 8px 0;
+            font-size: min(22px, 6.5vw);
+            margin-top: 15px;
+            margin-bottom: 10px;
           }
           .post__description h3 {
             font-size: min(18px, 6vw);
-            margin: 5px 0;
+            margin-top: 15px;
+            margin-bottom: 10px;
           }
           .post__description img {
             border-radius: 6px;
@@ -257,15 +261,34 @@ function BlogPost({ data }) {
           .post__description ul {
             padding-left: 20px;
           }
+          .post__description li {
+            margin: 5px 0;
+            font-size: 18px;
+            line-height: 27px;
+          }
           .post__description pre {
-            background-color: #222222;
-            color: #eeeeee;
+            margin: 10px 0;
             padding: 10px;
-            border-radius: 6px;
+            background-color: #2e2e2e;
+            border-radius: 4px;
             line-height: 1.5;
-            font-family: "Courier New", Courier, monospace;
+            font-family: monospace;
             white-space: break-spaces;
           }
+          .post__description pre code {
+            background-color: #2e2e2e;
+            color: #eeeeee;
+          }
+          .post__description code {
+            background-color: #eee;
+            font-family: monospace;
+            color: #f73838;
+            font-size: 15px;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 500;
+          }
+
           /* post MARKDOWN STYLES END */
           .blogPost__comments {
             margin-top: 0;
