@@ -29,7 +29,7 @@ function AboutACM() {
           color: #3792c1;
         }
         .aboutACM__text {
-          font-size: min(18px, 4.8vw);
+          font-size: min(17px, 4.8vw);
           color: #222222;
           line-height: 1.5;
           margin-bottom: 10px;

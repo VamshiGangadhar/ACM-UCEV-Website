@@ -10,32 +10,45 @@ function facultyIncharge() {
           <div className="hodMessage__content">
             <div className="hodMessage__imgText">
               <p className="hodMessage__text">
-                I would like to extend my warmest welcome to the department of Information Technology. Today we find
-                that information technology has become over whelming concept. Our department has remained true to the
-                vision on which it was founded. Over the years we have developed a distinct style and method that
-                bridges the theory – practice divide while remaining grounded in the core. Technology changes rapidly,
-                especially in the field of computing, whereas the science, if it changes at all, does so much more
-                gradually.Our understanding is that persons who are clear and thorough about the fundamentals can adapt
-                to rapid changes in technology relatively easily. Our Department has produced hundreds of professionals
-                and has established a name for itself in the country and abroad.
+                I would like to extend my warmest welcome to the department of
+                Information Technology. Today we find that information
+                technology has become over whelming concept. Our department has
+                remained true to the vision on which it was founded. Over the
+                years we have developed a distinct style and method that bridges
+                the theory – practice divide while remaining grounded in the
+                core. Technology changes rapidly, especially in the field of
+                computing, whereas the science, if it changes at all, does so
+                much more gradually.Our understanding is that persons who are
+                clear and thorough about the fundamentals can adapt to rapid
+                changes in technology relatively easily. Our Department has
+                produced hundreds of professionals and has established a name
+                for itself in the country and abroad.
               </p>
               <div className="hodMessage__imgAndCaption">
                 <Image src="/imgs/hod_image.jpg" height="200" width="300" />
                 <div className="hodMessage__caption">
                   <h4>Dr.G.Jaya Suma </h4>
-                  <p>Professor, HoD & OSD-JNTUK, Kurupam JNTUK University College of Engineering</p>
+                  <p>
+                    Professor, HoD & OSD-JNTUK, Kurupam JNTUK University College
+                    of Engineering
+                  </p>
                 </div>
               </div>
             </div>
             <p className="hodMessage__text">
-              They have consistently excelled in the highly competitive industrial environment. They are given a strong
-              foundation in information technology and problem-solving techniques, and are made adaptable to changes.
-              Through educational leadership, research and development, intellectual partnerships and community
-              outreach, we seek to improve technology and society. Students work alongside faculty members who are
-              leaders in their respective disciplines, have access to labs equipped with the latest technologies, and
-              are connected to a comprehensive University providing breadth and depth of opportunities. As a result, our
-              students acquire critical thinking capabilities as well as practically oriented skills that are prized by
-              prestigious companies and academic institutions.
+              They have consistently excelled in the highly competitive
+              industrial environment. They are given a strong foundation in
+              information technology and problem-solving techniques, and are
+              made adaptable to changes. Through educational leadership,
+              research and development, intellectual partnerships and community
+              outreach, we seek to improve technology and society. Students work
+              alongside faculty members who are leaders in their respective
+              disciplines, have access to labs equipped with the latest
+              technologies, and are connected to a comprehensive University
+              providing breadth and depth of opportunities. As a result, our
+              students acquire critical thinking capabilities as well as
+              practically oriented skills that are prized by prestigious
+              companies and academic institutions.
             </p>
           </div>
         </div>
@@ -86,9 +99,12 @@ function facultyIncharge() {
           .hodMessage__imgText img {
             flex: 1;
             border-radius: 6px;
-            box-shadow: 0 1.3px 2.2px rgba(0, 0, 0, 0.017), 0 3.1px 5.3px rgba(0, 0, 0, 0.024),
-              0 5.9px 10px rgba(0, 0, 0, 0.03), 0 10.5px 17.9px rgba(0, 0, 0, 0.036),
-              0 19.6px 33.4px rgba(0, 0, 0, 0.043), 0 47px 80px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 1.3px 2.2px rgba(0, 0, 0, 0.017),
+              0 3.1px 5.3px rgba(0, 0, 0, 0.024),
+              0 5.9px 10px rgba(0, 0, 0, 0.03),
+              0 10.5px 17.9px rgba(0, 0, 0, 0.036),
+              0 19.6px 33.4px rgba(0, 0, 0, 0.043),
+              0 47px 80px rgba(0, 0, 0, 0.06);
           }
           .hodMessage__text {
             color: #333;

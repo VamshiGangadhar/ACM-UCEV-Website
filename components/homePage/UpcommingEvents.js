@@ -13,13 +13,22 @@ function UpcommingEvents({ events }) {
       <Card
         className="upcommingEvents__eventCard"
         title={item.Event_name}
-        subTitle={"Starts at " + format(new Date(item.Start_time), "do MMM yyyy HH:mm bbb")}
+        subTitle={
+          "Starts at " +
+          format(new Date(item.Start_time), "do MMM yyyy HH:mm bbb")
+        }
       >
         {item.event_tags.map((tag, index) => (
-          <Chip className="upcommingEvents__cardChip" key={index} label={tag.Tag_name} />
+          <Chip
+            className="upcommingEvents__cardChip"
+            key={index}
+            label={tag.Tag_name}
+          />
         ))}
 
-        <p className="upcommingEvents__eventDescription">{item.Mini_description.trim()}</p>
+        <p className="upcommingEvents__eventDescription">
+          {item.Mini_description.trim()}
+        </p>
         <Button
           label="Read more"
           icon="pi pi-arrow-circle-right"
@@ -37,13 +46,19 @@ function UpcommingEvents({ events }) {
         <div className="upcommingEvents__content">
           <h1 className="upcommingEvents__title">Upcomming Events</h1>
           <p className="upcommingEvents__desc">
-            Upcomming Events from JNTUK UCEV ACM Student Chapter. Click on read more to learn more about the event and
-            to participate !
+            Upcomming Events from JNTUK UCEV ACM Student Chapter. Click on read
+            more to learn more about the event and to participate !
           </p>
-          <img className="upcommingEvents__img" src="/imgs/upcomming-events.svg" alt="upcomming events" />
+          <img
+            className="upcommingEvents__img"
+            src="/imgs/upcomming-events.svg"
+            alt="upcomming events"
+          />
         </div>
         <Timeline
-          value={events.filter((event) => Date.now() < new Date(event.Start_time))}
+          value={events.filter(
+            (event) => Date.now() < new Date(event.Start_time)
+          )}
           align="left"
           className="upcommingEvents__timeline"
           content={customizedContent}

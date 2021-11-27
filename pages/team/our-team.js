@@ -33,20 +33,34 @@ export const getStaticProps = async () => {
   };
 };
 function ourTeam({ teamMembers }) {
-  const paleColors = ["#0EA47A", "#CD5D7D", "#3D6271", "#0C81F6", "#506E86", "#FAB95B", "#F05454"];
+  const paleColors = [
+    "#0EA47A",
+    "#CD5D7D",
+    "#3D6271",
+    "#0C81F6",
+    "#506E86",
+    "#FAB95B",
+    "#F05454",
+  ];
   return (
     <>
       <Layout>
         <div className="ourTeam">
           <div className="ourTeam__hero">
             <div className="ourTeam__illustration">
-              <Image src="/imgs/our-team.svg" alt="Our team" width={300} height={200} />
+              <Image
+                src="/imgs/our-team.svg"
+                alt="Our team"
+                width={300}
+                height={200}
+              />
             </div>
             <div className="ourTeam__introduction">
               <h1 className="ourTeam__title">Our team</h1>
               <p className="ourTeam__description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut dignissimos corporis sit perferendis
-                obcaecati praesentium illo numquam, voluptatem omnis ea.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
+                dignissimos corporis sit perferendis obcaecati praesentium illo
+                numquam, voluptatem omnis ea.
               </p>
             </div>
           </div>
@@ -55,7 +69,13 @@ function ourTeam({ teamMembers }) {
               return (
                 <TeamMember
                   key={index}
-                  memberPositionColor={paleColors[index <= paleColors.length ? index : index % paleColors.length]}
+                  memberPositionColor={
+                    paleColors[
+                      index <= paleColors.length
+                        ? index
+                        : index % paleColors.length
+                    ]
+                  }
                   memberName={member.Member_name}
                   memberPosition={member.Member_position}
                   memberImage={member.Member_image}

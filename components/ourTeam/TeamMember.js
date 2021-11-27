@@ -2,7 +2,14 @@ import React from "react";
 import Image from "next/image";
 import { Button } from "primereact/button";
 
-function TeamMember({ memberName, memberPosition, memberPositionColor, memberImage, memberAbout, memberSocial }) {
+function TeamMember({
+  memberName,
+  memberPosition,
+  memberPositionColor,
+  memberImage,
+  memberAbout,
+  memberSocial,
+}) {
   return (
     <>
       <div className="teamMember">
@@ -15,7 +22,10 @@ function TeamMember({ memberName, memberPosition, memberPositionColor, memberIma
           </div>
           <div
             className="teamMember__position"
-            style={{ color: `${memberPositionColor}`, border: `2px solid ${memberPositionColor}` }}
+            style={{
+              color: `${memberPositionColor}`,
+              border: `2px solid ${memberPositionColor}`,
+            }}
           >
             <h3>{memberPosition}</h3>
           </div>

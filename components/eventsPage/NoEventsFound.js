@@ -1,18 +1,27 @@
 import React from "react";
 import { Button } from "primereact/button";
 import truncateString from "../../utils/truncateString";
-function NoEventsFound({ filterStatus, searchEntry, setSearchEntry, setFilterStatus }) {
+function NoEventsFound({
+  filterStatus,
+  searchEntry,
+  setSearchEntry,
+  setFilterStatus,
+}) {
   return (
     <>
       <div className="noEventsFound">
-        <img className="noEventsFound__Illustration" src="/imgs/results-not-found.svg" alt="upcoming events" />
+        <img
+          className="noEventsFound__Illustration"
+          src="/imgs/results-not-found.svg"
+          alt="upcoming events"
+        />
         <div className="noEventsFound__Message">
           <h2 className="noEventsFound__MainMessage">No results found</h2>
           {filterStatus.length != 0 ? (
             <>
               <p className="noEventsFound__DetailedMessage">
-                No results found for &quot;{truncateString(searchEntry, 100)}&quot;. Try a different search or cancel
-                the search below.
+                No results found for &quot;{truncateString(searchEntry, 100)}
+                &quot;. Try a different search or cancel the search below.
               </p>
               <Button
                 label="Cancel Search"
@@ -23,13 +32,16 @@ function NoEventsFound({ filterStatus, searchEntry, setSearchEntry, setFilterSta
           ) : (
             <>
               <p className="noEventsFound__StatusFilterDetailedMessage">
-                You need to select at least one event status to filter the results. Try selecting more statuses or click
-                the button below to reset filters
+                You need to select at least one event status to filter the
+                results. Try selecting more statuses or click the button below
+                to reset filters
               </p>
               <Button
                 label="Reset Filters"
                 className="noEventsFound__searchCancelBtn"
-                onClick={() => setFilterStatus(["upcoming", "ongoing", "completed"])}
+                onClick={() =>
+                  setFilterStatus(["upcoming", "ongoing", "completed"])
+                }
               />
             </>
           )}

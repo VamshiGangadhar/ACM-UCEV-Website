@@ -34,11 +34,23 @@ export const getStaticProps = async () => {
   let updatedData = [];
   data.events.map((event) => {
     if (Date.now() < new Date(event.Start_time)) {
-      updatedData.push({ ...event, event_status: { severity: "info", text: "upcoming" } });
-    } else if (new Date(event.Start_time) <= Date.now() && Date.now() <= new Date(event.End_time)) {
-      updatedData.push({ ...event, event_status: { severity: "warn", text: "ongoing" } });
+      updatedData.push({
+        ...event,
+        event_status: { severity: "info", text: "upcoming" },
+      });
+    } else if (
+      new Date(event.Start_time) <= Date.now() &&
+      Date.now() <= new Date(event.End_time)
+    ) {
+      updatedData.push({
+        ...event,
+        event_status: { severity: "warn", text: "ongoing" },
+      });
     } else if (Date.now() > new Date(event.End_time)) {
-      updatedData.push({ ...event, event_status: { severity: "error", text: "completed" } });
+      updatedData.push({
+        ...event,
+        event_status: { severity: "error", text: "completed" },
+      });
     }
   });
   return {
@@ -48,13 +60,19 @@ export const getStaticProps = async () => {
   };
 };
 function Events({ eventsOverview }) {
-  const [referenceEventsOverview, setReferenceEventsOverview] = useState(eventsOverview);
+  const [referenceEventsOverview, setReferenceEventsOverview] =
+    useState(eventsOverview);
   const [filterStatus, setFilterStatus] = useState([]);
   const [searchEntry, setSearchEntry] = useState("");
   const [results, setResults] = useState([]);
 
   let fuse = new Fuse(referenceEventsOverview, {
-    keys: ["Event_name", "Mini_description", "event_tags.Tag_name", "event_status.text"],
+    keys: [
+      "Event_name",
+      "Mini_description",
+      "event_tags.Tag_name",
+      "event_status.text",
+    ],
   });
 
   useEffect(() => {
@@ -67,7 +85,12 @@ function Events({ eventsOverview }) {
     });
     setReferenceEventsOverview(updatedEventsOverview);
     fuse = new Fuse(referenceEventsOverview, {
-      keys: ["Event_name", "Mini_description", "event_tags.Tag_name", "event_status.text"],
+      keys: [
+        "Event_name",
+        "Mini_description",
+        "event_tags.Tag_name",
+        "event_status.text",
+      ],
     });
     let newResult = [];
     updatedEventsOverview.map((event) => {
@@ -95,7 +118,8 @@ function Events({ eventsOverview }) {
           <div className="events__left">
             <h1 className="events__title">Events</h1>
             {/* #####################NO RESULTS FOUND##################### */}
-            {filterStatus.length === 0 || (searchEntry != "" && results.length === 0) ? (
+            {filterStatus.length === 0 ||
+            (searchEntry != "" && results.length === 0) ? (
               <NoEventsFound
                 filterStatus={filterStatus}
                 searchEntry={searchEntry}
@@ -190,7 +214,9 @@ function Events({ eventsOverview }) {
                   <Message
                     className="events__filterSearchWarnMsg"
                     severity="warn"
-                    text={`searching only events with status ${filterStatus.join(", ")}`}
+                    text={`searching only events with status ${filterStatus.join(
+                      ", "
+                    )}`}
                   />
                 ) : null}
                 <span className="p-input-icon-left">

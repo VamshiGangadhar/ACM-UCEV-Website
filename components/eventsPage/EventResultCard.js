@@ -5,7 +5,15 @@ import { Chip } from "primereact/chip";
 import { Message } from "primereact/message";
 import { Button } from "primereact/button";
 
-function EventResultCard({ slug, event_status, event_name, event_tags, mini_description, start_time, end_time }) {
+function EventResultCard({
+  slug,
+  event_status,
+  event_name,
+  event_tags,
+  mini_description,
+  start_time,
+  end_time,
+}) {
   const router = useRouter();
   return (
     <>
@@ -13,13 +21,21 @@ function EventResultCard({ slug, event_status, event_name, event_tags, mini_desc
         <Message severity={event_status.severity} text={event_status.text} />
         <h2 className="eventResultCard_title">{event_name}</h2>
         {event_tags.map((tag, index) => (
-          <Chip className="eventResultCard_tag" key={index} label={tag.Tag_name} />
+          <Chip
+            className="eventResultCard_tag"
+            key={index}
+            label={tag.Tag_name}
+          />
         ))}
         <p className="eventResultCard_desc">{mini_description}</p>
         <p className="eventResultCard_eventTimings">
-          <span className="eventResultCard_startTime">{format(new Date(start_time), "do MMM yyyy HH:mm bbb")}</span>
+          <span className="eventResultCard_startTime">
+            {format(new Date(start_time), "do MMM yyyy HH:mm bbb")}
+          </span>
           <i className="pi pi-arrow-circle-right" />
-          <span className="eventResultCard_endTime">{format(new Date(end_time), "do MMM yyyy HH:mm bbb")}</span>
+          <span className="eventResultCard_endTime">
+            {format(new Date(end_time), "do MMM yyyy HH:mm bbb")}
+          </span>
         </p>
         <Button
           label="Read more"

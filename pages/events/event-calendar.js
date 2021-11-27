@@ -35,7 +35,11 @@ export const getStaticProps = async () => {
   });
   let allEvents = [];
   data.events.map((event) => {
-    allEvents.push({ title: event.Event_name, start: event.Start_time, end: event.End_time });
+    allEvents.push({
+      title: event.Event_name,
+      start: event.Start_time,
+      end: event.End_time,
+    });
   });
   return {
     props: {
@@ -50,18 +54,25 @@ function eventCalendar({ events }) {
         <div className="eventCalendar">
           <Calendar
             localizer={localizer}
-            events={events}
+            events={events.map((event) => {
+              event.start = new Date(event.start);
+              event.end = new Date(event.end);
+              return event;
+            })}
             startAccessor="start"
             endAccessor="end"
             style={{ height: 500 }}
           />
         </div>
       </Layout>
-      <style jsx>{`
+      <style jsx global>{`
         .eventCalendar {
           max-width: 1200px;
           margin: 0 auto;
           padding: 50px 20px;
+        }
+        .rbc-calendar {
+          width: min(90vw, 900px);
         }
       `}</style>
     </>

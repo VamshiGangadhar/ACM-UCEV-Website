@@ -64,7 +64,9 @@ function Home({ eventsOverview, homepageAlbum }) {
               loading="lazy"
             />
           </div>
-          <UpcommingEvents events={eventsOverview} />
+          {eventsOverview.filter(
+            (event) => Date.now() < new Date(event.Start_time)
+          ).length != 0 && <UpcommingEvents events={eventsOverview} />}
           <SubscribeNewsLetter />
         </div>
       </Layout>

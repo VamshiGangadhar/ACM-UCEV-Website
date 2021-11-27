@@ -25,11 +25,15 @@ function SubscribeNewsLetter() {
     const MailChimpID = "3b1d90b827";
     const queryString = (data) => {
       return Object.keys(data)
-        .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+        .map(
+          (key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
+        )
         .join("&");
     };
     jsonp(
-      `${MailChimpAddr}/subscribe/post-json?u=${MailChimpU}&amp;id=${MailChimpID}&${queryString(formData)}`,
+      `${MailChimpAddr}/subscribe/post-json?u=${MailChimpU}&amp;id=${MailChimpID}&${queryString(
+        formData
+      )}`,
       { param: "c" },
       (err, data) => {
         if (err) {
@@ -43,7 +47,8 @@ function SubscribeNewsLetter() {
           });
           messages.current.show({
             severity: "error",
-            detail: "There was an error. Please try again later after some time",
+            detail:
+              "There was an error. Please try again later after some time",
             sticky: true,
             closable: false,
           });
@@ -70,14 +75,19 @@ function SubscribeNewsLetter() {
     <>
       <Toast ref={toast} />
       <div className="subscribeNewsLetter">
-        <h1 className="subscribeNewsLetter__title">Get Notifications on New Events</h1>
+        <h1 className="subscribeNewsLetter__title">
+          Get Notifications on New Events
+        </h1>
         <p className="subscribeNewsLetter__desc">
-          Subscribe to our newsletter for free and get notified when we conduct new events and promotions directly to
-          your email inbox.
+          Subscribe to our newsletter for free and get notified when we conduct
+          new events and promotions directly to your email inbox.
         </p>
         <Messages ref={messages} />
         {!subscribed && (
-          <form className="subscribeNewsLetter__form" onSubmit={handleNewsLetterSubmit}>
+          <form
+            className="subscribeNewsLetter__form"
+            onSubmit={handleNewsLetterSubmit}
+          >
             <span className="subscribeNewsLetter__name p-input-icon-left">
               <i className="pi pi-user" />
               <InputText
@@ -98,7 +108,11 @@ function SubscribeNewsLetter() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </span>
-            <Button icon="pi pi-send" label="Subscribe" className="subscribeNewsLetter__btn" />
+            <Button
+              icon="pi pi-send"
+              label="Subscribe"
+              className="subscribeNewsLetter__btn"
+            />
           </form>
         )}
       </div>

@@ -8,33 +8,52 @@ function Footer() {
           <div className="footer__contact">
             <h3 className="footer__colContentTitle">Contact</h3>
             <p>
-              IT Dept - JNTU Vizainagaram AB2 Block <br /> Vizainagaram, AP - 201313, India
+              IT Dept - JNTU Vizainagaram AB2 Block <br /> Vizainagaram, AP -
+              201313, India
             </p>
             <p>Email: hod.it@jntukucev.ac.in</p>
           </div>
           <div className="footer__about">
             <h3 className="footer__colContentTitle">About</h3>
             <p>
-              ACM, The world&apos;s largest educational and scientific computing society, delivers resources that
-              advance computing as a science and profession.
+              ACM, The world&apos;s largest educational and scientific computing
+              society, delivers resources that advance computing as a science
+              and profession.
             </p>
           </div>
           <div className="footer__social">
             <h3 className="footer__colContentTitle">Social</h3>
             <div className="footer__socialBtns">
               <div className="footer__socialBtnsRow">
-                <Button className="footer__socialBtn p-button-outlined" label="Youtube" icon="pi pi-youtube" />
-                <Button className="footer__socialBtn p-button-outlined" label="Facebook" icon="pi pi-facebook" />
+                <Button
+                  className="footer__socialBtn p-button-outlined"
+                  label="Youtube"
+                  icon="pi pi-youtube"
+                />
+                <Button
+                  className="footer__socialBtn p-button-outlined"
+                  label="Facebook"
+                  icon="pi pi-facebook"
+                />
               </div>
               <div className="footer__socialBtnsRow">
-                <Button className="footer__socialBtn p-button-outlined" label="Twitter" icon="pi pi-twitter" />
-                <Button className="footer__socialBtn p-button-outlined" label="Instagram" icon="pi pi-info-circle" />
+                <Button
+                  className="footer__socialBtn p-button-outlined"
+                  label="Twitter"
+                  icon="pi pi-twitter"
+                />
+                <Button
+                  className="footer__socialBtn p-button-outlined"
+                  label="Instagram"
+                  icon="pi pi-instagram"
+                />
               </div>
             </div>
           </div>
         </div>
         <div className="footer__topper">
-          Copyright ©{new Date().getFullYear()}, JNTUK UCEV ACM Student Chapter. Designed by Srujan
+          Copyright ©{new Date().getFullYear()}, JNTUK UCEV ACM Student Chapter.
+          Designed by Srujan
         </div>
       </div>
       <style jsx global>{`

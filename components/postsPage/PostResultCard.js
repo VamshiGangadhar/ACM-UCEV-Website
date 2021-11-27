@@ -24,7 +24,11 @@ function PostResultCard({
         <div className="postResultCard__content">
           <div className="postResultCard_tagsContainer">
             {post_tags.map((tag) => (
-              <Chip className="postResultCard_tag" key={tag.id} label={tag.Tag_name} />
+              <Chip
+                className="postResultCard_tag"
+                key={tag.id}
+                label={tag.Tag_name}
+              />
             ))}
           </div>
           <h2
@@ -46,18 +50,30 @@ function PostResultCard({
               />
             ))}
           </div>
-          <p className="postResultCard_desc">{truncateString(mini_description, 100)}</p>
+          <p className="postResultCard_desc">
+            {truncateString(mini_description, 100)}
+          </p>
           <div className="postResultCard_dateContainer">
             {created_at == updated_at ? (
-              <span className="postResultCard_date">{format(new Date(created_at), "MMM dd, yyyy")}</span>
+              <span className="postResultCard_date">
+                {format(new Date(created_at), "MMM dd, yyyy")}
+              </span>
             ) : (
-              <span className="postResultCard_date"> Updated {format(new Date(updated_at), "MMM dd, yyyy")}</span>
+              <span className="postResultCard_date">
+                {" "}
+                Updated {format(new Date(updated_at), "MMM dd, yyyy")}
+              </span>
             )}{" "}
             · ~{readingTime(content)} min read
           </div>
         </div>
         <div className="postResultCard__image">
-          <Image src={cover_image} alt={title} layout="fill" objectFit="cover" />
+          <Image
+            src={cover_image}
+            alt={title}
+            layout="fill"
+            objectFit="cover"
+          />
         </div>
       </div>
 

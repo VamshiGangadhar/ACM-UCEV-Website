@@ -21,7 +21,10 @@ function EventDetails({
       let url = `https://calndr.link/d/event/?service=${provider}&start=${format(
         new Date(start_time),
         "yyyy'-'MM'-'dd p"
-      )}&end=${format(new Date(end_time), "yyyy'-'MM'-'dd p")}&title=${event_name}&description=${event_description}`;
+      )}&end=${format(
+        new Date(end_time),
+        "yyyy'-'MM'-'dd p"
+      )}&title=${event_name}&description=${event_description}`;
       window.open(url, "_blank");
     }
     setShowCalendarDialog(false);
@@ -47,7 +50,11 @@ function EventDetails({
             </b>
             <br />
             {event_tags?.map((tag, index) => (
-              <Chip className="eventDetails_eventType" key={index} label={tag.Tag_name} />
+              <Chip
+                className="eventDetails_eventType"
+                key={index}
+                label={tag.Tag_name}
+              />
             ))}
           </li>
           <li>
@@ -88,8 +95,16 @@ function EventDetails({
           onHide={() => setShowCalendarDialog(false)}
         >
           <div className="eventDetails_selectCalBtns">
-            <Button label="Google Calendar" icon="pi pi-google" onClick={() => handleCalendarProviderClick("google")} />
-            <Button label="Apple Calendar" icon="pi pi-apple" onClick={() => handleCalendarProviderClick("apple")} />
+            <Button
+              label="Google Calendar"
+              icon="pi pi-google"
+              onClick={() => handleCalendarProviderClick("google")}
+            />
+            <Button
+              label="Apple Calendar"
+              icon="pi pi-apple"
+              onClick={() => handleCalendarProviderClick("apple")}
+            />
             <Button
               label="Outlook Calendar"
               icon="pi pi-microsoft"
