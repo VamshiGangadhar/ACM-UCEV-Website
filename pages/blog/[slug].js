@@ -9,7 +9,29 @@ import { Chip } from "primereact/chip";
 import { Button } from "primereact/button";
 import { useRouter } from "next/router";
 import ReactUtterences from "react-utterances";
-import CodeBlock from "../../components/singlePostPage/CodeBlock";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { Prism } from "react-syntax-highlighter/dist/cjs/styles/prism";
+
+const CodeBlock = {
+  code({ node, inline, className, children, ...props }) {
+    const match = /language-(\w+)/.exec(className || "");
+    return !inline && match ? (
+      <SyntaxHighlighter
+        style={Prism}
+        language={match[1]}
+        showLineNumbers
+        PreTag="div"
+        {...props}
+      >
+        {String(children).replace(/\n$/, "")}
+      </SyntaxHighlighter>
+    ) : (
+      <code className={className} {...props}>
+        {children}
+      </code>
+    );
+  },
+};
 
 export const getStaticPaths = async () => {
   const client = new ApolloClient({
