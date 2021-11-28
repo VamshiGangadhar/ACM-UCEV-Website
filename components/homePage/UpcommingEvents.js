@@ -33,7 +33,7 @@ function UpcommingEvents({ events }) {
           label="Read more"
           icon="pi pi-arrow-circle-right"
           onClick={() => {
-            router.push(`/events/${item.Slug}`);
+            window.location = `/events/${item.Slug}`;
           }}
         ></Button>
       </Card>
