@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import ReactUtterences from "react-utterances";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { Prism } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import MetaTags from "../../components/layout/MetaTags";
 
 const CodeBlock = {
   code({ node, inline, className, children, ...props }) {
@@ -96,14 +97,24 @@ export const getStaticProps = async ({ params }) => {
   return {
     props: {
       data: data.posts[0],
+      APPLICATION_URL: process.env.APPLICATION_URL,
     },
   };
 };
 
-function BlogPost({ data }) {
+function BlogPost({ data, APPLICATION_URL }) {
   let router = useRouter();
   return (
     <>
+      <MetaTags
+        title={data.Title}
+        description={data.Mini_description}
+        image={data.Cover_image?.url}
+        path={router.asPath}
+        keywords={data.tags.map((tag) => tag.Tag_name)}
+        author={data.authors[0].Author_name}
+        APPLICATION_URL={APPLICATION_URL}
+      />
       <Layout>
         <article className="blogPost">
           <Button

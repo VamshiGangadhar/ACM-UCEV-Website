@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import EventDetails from "../../components/singleEventPage/EventDetails";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialOceanic } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import MetaTags from "../../components/layout/MetaTags";
 
 const CodeBlock = {
   code({ node, inline, className, children, ...props }) {
@@ -84,11 +85,12 @@ export const getStaticProps = async ({ params }) => {
   return {
     props: {
       data: data.events[0],
+      APPLICATION_URL: process.env.APPLICATION_URL,
     },
   };
 };
 
-function Event({ data }) {
+function Event({ data, APPLICATION_URL }) {
   const router = useRouter();
   const [eventStatus, setEventStatus] = useState({});
   const [registerPrice, setRegisterPrice] = useState("free");
@@ -114,6 +116,13 @@ function Event({ data }) {
 
   return (
     <>
+      <MetaTags
+        title={data.Event_name}
+        description={data.Mini_description}
+        image={data.Cover_image?.url}
+        path={router.asPath}
+        APPLICATION_URL={APPLICATION_URL}
+      />
       <Layout>
         <div className="event">
           <main className="event__left">
