@@ -29,10 +29,11 @@ export const getStaticProps = async () => {
   return {
     props: {
       teamMembers: data.ourTeams,
+      APPLICATION_URL: process.env.APPLICATION_URL,
     },
   };
 };
-function ourTeam({ teamMembers }) {
+function ourTeam({ teamMembers, APPLICATION_URL }) {
   const paleColors = [
     "#0EA47A",
     "#CD5D7D",
@@ -44,7 +45,11 @@ function ourTeam({ teamMembers }) {
   ];
   return (
     <>
-      <Layout>
+      <Layout
+        metaTitle="ACM UCEV Team"
+        metaDescription="Team at JNTUK UCEV ACM Student's chapter"
+        APPLICATION_URL={APPLICATION_URL}
+      >
         <div className="ourTeam">
           <div className="ourTeam__hero">
             <div className="ourTeam__illustration">

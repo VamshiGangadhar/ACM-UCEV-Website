@@ -116,14 +116,12 @@ function Event({ data, APPLICATION_URL }) {
 
   return (
     <>
-      <MetaTags
-        title={data.Event_name}
-        description={data.Mini_description}
-        image={data.Cover_image?.url}
-        path={router.asPath}
+      <Layout
+        metaTitle={data.Event_name}
+        metaDescription={data.Mini_description}
+        metaImage={data.Cover_image?.url}
         APPLICATION_URL={APPLICATION_URL}
-      />
-      <Layout>
+      >
         <div className="event">
           <main className="event__left">
             <Button

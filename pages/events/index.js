@@ -56,10 +56,11 @@ export const getStaticProps = async () => {
   return {
     props: {
       eventsOverview: updatedData,
+      APPLICATION_URL: process.env.APPLICATION_URL,
     },
   };
 };
-function Events({ eventsOverview }) {
+function Events({ eventsOverview, APPLICATION_URL }) {
   const [referenceEventsOverview, setReferenceEventsOverview] =
     useState(eventsOverview);
   const [filterStatus, setFilterStatus] = useState([]);
@@ -113,7 +114,11 @@ function Events({ eventsOverview }) {
 
   return (
     <>
-      <Layout>
+      <Layout
+        metaTitle="ACM UCEV Events"
+        metaDescription="find all the events conducted by JNTUK UCEV ACM Student's chapter"
+        APPLICATION_URL={APPLICATION_URL}
+      >
         <div className="events">
           <div className="events__left">
             <h1 className="events__title">Events</h1>

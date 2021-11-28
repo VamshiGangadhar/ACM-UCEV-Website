@@ -40,14 +40,19 @@ export const getStaticProps = async () => {
   return {
     props: {
       postsOverview: data.posts,
+      APPLICATION_URL: process.env.APPLICATION_URL,
     },
   };
 };
-function blogIndex({ postsOverview }) {
+function blogIndex({ postsOverview, APPLICATION_URL }) {
   console.log(postsOverview);
   return (
     <>
-      <Layout>
+      <Layout
+        metaTitle="ACM UCEV Blog"
+        metaDescription="find all the blog posts from JNTUK UCEV ACM Student's chapter"
+        APPLICATION_URL={APPLICATION_URL}
+      >
         <div className="blogIndexTitle">
           <h1 className="blogIndex__title">
             <i

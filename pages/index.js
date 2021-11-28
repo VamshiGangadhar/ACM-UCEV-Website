@@ -41,13 +41,14 @@ export const getStaticProps = async () => {
     props: {
       eventsOverview: data.events,
       homepageAlbum: data.homepageAlbum,
+      APPLICATION_URL: process.env.APPLICATION_URL,
     },
   };
 };
-function Home({ eventsOverview, homepageAlbum }) {
+function Home({ eventsOverview, homepageAlbum, APPLICATION_URL }) {
   return (
     <>
-      <Layout>
+      <Layout APPLICATION_URL={APPLICATION_URL}>
         <Hero />
         <div className="home__container">
           <AboutChapter photos={homepageAlbum} />

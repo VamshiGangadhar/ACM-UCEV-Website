@@ -47,14 +47,19 @@ export const getStaticProps = async () => {
   return {
     props: {
       events: allEvents,
+      APPLICATION_URL: process.env.APPLICATION_URL,
     },
   };
 };
-function EventCalendar({ events }) {
+function EventCalendar({ events, APPLICATION_URL }) {
   let router = useRouter();
   return (
     <>
-      <Layout>
+      <Layout
+        metaTitle="ACM UCEV Events Calendar"
+        metaDescription="calendar of all events from JNTUK UCEV ACM Student's chapter"
+        APPLICATION_URL={APPLICATION_URL}
+      >
         <div className="eventCalendar">
           <Calendar
             localizer={localizer}

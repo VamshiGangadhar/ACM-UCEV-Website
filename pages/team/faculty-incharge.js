@@ -1,10 +1,23 @@
 import React from "react";
 import Layout from "../../components/layout/Layout";
 import Image from "next/image";
-function facultyIncharge() {
+
+export async function getStaticProps() {
+  return {
+    props: {
+      APPLICATION_URL: process.env.APPLICATION_URL,
+    },
+  };
+}
+
+function facultyInCharge({ APPLICATION_URL }) {
   return (
     <>
-      <Layout>
+      <Layout
+        metaTitle="ACM UCEV Faculty In-charge"
+        metaDescription="About faculty in-charge of JNTUK UCEV ACM Student's chapter"
+        APPLICATION_URL={APPLICATION_URL}
+      >
         <div className="hodMessage">
           <h1 className="hodMessage__title">HOD Message</h1>
           <div className="hodMessage__content">
@@ -145,4 +158,4 @@ function facultyIncharge() {
   );
 }
 
-export default facultyIncharge;
+export default facultyInCharge;
