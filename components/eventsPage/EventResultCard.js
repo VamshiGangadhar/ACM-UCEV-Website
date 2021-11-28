@@ -41,7 +41,7 @@ function EventResultCard({
           label="Read more"
           icon="pi pi-arrow-circle-right"
           onClick={() => {
-            router.push(`/events/${slug}`);
+            window.location = `/events/${slug}`;
           }}
         ></Button>
       </div>

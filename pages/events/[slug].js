@@ -7,7 +7,29 @@ import { Button } from "primereact/button";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import EventDetails from "../../components/singleEventPage/EventDetails";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialOceanic } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
+const CodeBlock = {
+  code({ node, inline, className, children, ...props }) {
+    const match = /language-(\w+)/.exec(className || "");
+    return !inline && match ? (
+      <SyntaxHighlighter
+        style={materialOceanic}
+        language={match[1]}
+        showLineNumbers
+        PreTag="div"
+        {...props}
+      >
+        {String(children).replace(/\n$/, "")}
+      </SyntaxHighlighter>
+    ) : (
+      <code className={className} {...props}>
+        {children}
+      </code>
+    );
+  },
+};
 export const getStaticPaths = async () => {
   const client = new ApolloClient({
     uri: process.env.BACKEND_GRAPHQL_ENDPOINT,
@@ -71,21 +93,24 @@ function Event({ data }) {
   const [eventStatus, setEventStatus] = useState({});
   const [registerPrice, setRegisterPrice] = useState("free");
   const [isValid, setIsValid] = useState(true);
+
+  // SET EVENT STATUS BASED ON CURRENT TIME AND FETCHES REGISTRATION PRICE
   useEffect(() => {
     if (Date.now() < new Date(data.Start_time)) {
       setEventStatus({ severity: "info", text: "Upcomming" });
-    } else if (new Date(data.Start_time) <= Date.now() && Date.now() <= new Date(data.End_time)) {
+    } else if (
+      new Date(data.Start_time) <= Date.now() &&
+      Date.now() <= new Date(data.End_time)
+    ) {
       setEventStatus({ severity: "warn", text: "Ongoing" });
     } else if (Date.now() > new Date(data.End_time)) {
       setEventStatus({ severity: "error", text: "Completed" });
       setIsValid(false);
     }
-    setRegisterPrice(data.Registration_price == 0 ? "free" : "Rs. " + data.Registration_price);
+    setRegisterPrice(
+      data.Registration_price == 0 ? "free" : "Rs. " + data.Registration_price
+    );
   }, [data]);
-
-  const handleRegisterClick = () => {
-    window.open(data.Registration_link, "_blank");
-  };
 
   return (
     <>
@@ -100,26 +125,52 @@ function Event({ data }) {
             />
             <h1 className="event__title">{data.Event_name}</h1>
             {data?.event_tags?.map((tag, index) => (
-              <Chip className="event__cardChip" key={index} label={tag.Tag_name} />
+              <Chip
+                className="event__cardChip"
+                key={index}
+                label={tag.Tag_name}
+              />
             ))}
             <div className="event__coverImage">
-              <Image src={data.Cover_image?.url} alt="Event Cover" objectFit="cover" layout="fill" />
+              <Image
+                src={data.Cover_image?.url}
+                alt="Event Cover"
+                objectFit="cover"
+                layout="fill"
+              />
             </div>
-            <ReactMarkdown className="event__description">{data.Description}</ReactMarkdown>
+            <ReactMarkdown
+              components={CodeBlock}
+              className="event__description"
+            >
+              {data.Description}
+            </ReactMarkdown>
             {isValid && (
               <section className="event__registerSection">
                 <h1>Register to This Event</h1>
                 <p>
-                  To register to this event to participate, Press the Register button below. You will be taken to
-                  external site for additional details. The registration fees for this event is {registerPrice}
+                  To register to this event to participate, Press the Register
+                  button below. You will be taken to external site for
+                  additional details. The registration fees for this event is{" "}
+                  {registerPrice}
                 </p>
-                <Button
-                  label="Register"
-                  icon="pi pi-external-link"
-                  onClick={handleRegisterClick}
-                  tooltip="opens registration form in new tab"
-                  tooltipOptions={{ position: "bottom" }}
-                />
+                {data.Registration_price != 0 ? (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: data.Registration_link,
+                    }}
+                  />
+                ) : (
+                  <Button
+                    label="Register"
+                    icon="pi pi-external-link"
+                    onClick={() => {
+                      window.open(data.Registration_link, "_blank");
+                    }}
+                    tooltip="opens registration form in new tab"
+                    tooltipOptions={{ position: "bottom" }}
+                  />
+                )}
               </section>
             )}
           </main>
@@ -187,8 +238,9 @@ function Event({ data }) {
           max-width: 100%;
         }
         .event__description p {
-          line-height: 1.5;
-          margin-bottom: 10px;
+          font-size: min(16px, 4.5vw);
+          line-height: 27px;
+          margin: 10px 0;
           color: #222222;
         }
         .event__description h1,
@@ -197,18 +249,24 @@ function Event({ data }) {
           color: #444444;
         }
         .event__description h1 {
-          font-size: min(25px, 7vw);
-          margin: 10px 0;
+          font-size: min(28px, 7vw);
+          margin-top: 25px;
+          margin-bottom: 20px;
         }
         .event__description h2 {
-          font-size: min(20px, 6.5vw);
-          margin: 8px 0;
+          font-size: min(22px, 6.5vw);
+          margin-top: 15px;
+          margin-bottom: 10px;
         }
         .event__description h3 {
           font-size: min(18px, 6vw);
-          margin: 5px 0;
+          margin-top: 15px;
+          margin-bottom: 10px;
         }
         .event__description img {
+          display: block;
+          margin: 0 auto;
+          max-height: 500px;
           border-radius: 6px;
           overflow: hidden;
         }
@@ -216,16 +274,29 @@ function Event({ data }) {
         .event__description ul {
           padding-left: 20px;
         }
-        .event__description pre {
-          background-color: #222222;
-          color: #eeeeee;
-          padding: 10px;
-          border-radius: 6px;
-          line-height: 1.5;
-          font-family: "Courier New", Courier, monospace;
-          white-space: break-spaces;
+        .event__description li {
+          margin: 5px 0;
+          font-size: min(16px, 4.5vw);
+          line-height: 27px;
         }
-        /* EVENT MARKDOWN STYLES END */
+        .event__description pre {
+          font-size: min(15px, 3.8vw);
+        }
+        .event__description pre code {
+          background-color: inherit;
+          white-space: normal;
+        }
+        .event__description code {
+          word-break: break-word;
+          background-color: #eee;
+          font-family: monospace;
+          font-size: min(15px, 3.8vw);
+          color: #f73838;
+          padding: 2px 4px;
+          border-radius: 4px;
+          font-weight: 500;
+        }
+        /* event MARKDOWN STYLES END */
         .event__registerSection {
           margin: 20px 0;
         }
