@@ -414,7 +414,7 @@ function RegistrationScreen({
           .registrationScreen__fieldFlexWrapper {
             flex-direction: column;
           }
-          .p-dialog[pr_id_2] {
+          .p-component-overlay > .p-dialog {
             width: ${openRegistrationScreen && "100vw !important"};
           }
         }
