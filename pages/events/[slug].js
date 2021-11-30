@@ -9,7 +9,11 @@ import { useRouter } from "next/router";
 import EventDetails from "../../components/singleEventPage/EventDetails";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialOceanic } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import MetaTags from "../../components/layout/MetaTags";
+import Lottie from "react-lottie";
+import animationData from "../../public/lottie-files/registration-success.json";
+import { Dialog } from "primereact/dialog";
+import { Toast } from "primereact/toast";
+import RegistrationScreen from "../../components/singleEventPage/RegistrationScreen";
 
 const CodeBlock = {
   code({ node, inline, className, children, ...props }) {
@@ -86,12 +90,17 @@ export const getStaticProps = async ({ params }) => {
     props: {
       data: data.events[0],
       APPLICATION_URL: process.env.APPLICATION_URL,
+      RAZORPAY_KEY_ID: process.env.RAZORPAY_KEY_ID,
     },
   };
 };
 
-function Event({ data, APPLICATION_URL }) {
+function Event({ data, APPLICATION_URL, RAZORPAY_KEY_ID }) {
   const router = useRouter();
+  let toast = React.useRef(null);
+  const [openRegistrationScreen, setOpenRegistrationScreen] = useState(false);
+  const [registrationSuccessModal, setRegistrationSuccessModal] =
+    useState(false);
   const [eventStatus, setEventStatus] = useState({});
   const [registerPrice, setRegisterPrice] = useState("free");
   const [isValid, setIsValid] = useState(true);
@@ -116,6 +125,64 @@ function Event({ data, APPLICATION_URL }) {
 
   return (
     <>
+      {/* REGISTRATION FORM MODAL */}
+      <RegistrationScreen
+        setOpenRegistrationScreen={setOpenRegistrationScreen}
+        openRegistrationScreen={openRegistrationScreen}
+        event_name={data.Event_name}
+        event_tags={data.event_tags}
+        event_id={data.id}
+        event_description={data.Mini_description}
+        start_time={data.Start_time}
+        end_time={data.End_time}
+        event_price={data.Registration_price}
+        APPLICATION_URL={APPLICATION_URL}
+        RAZORPAY_KEY_ID={RAZORPAY_KEY_ID}
+        setRegistrationSuccessModal={setRegistrationSuccessModal}
+      />
+      {/* PAYMENT SUCCESS ANIMATION */}
+      <Dialog
+        visible={registrationSuccessModal}
+        style={{ width: "min(400px, 90%)" }}
+        draggable={false}
+        onHide={() => setRegistrationSuccessModal(false)}
+      >
+        <div
+          style={{
+            width: "90%",
+            margin: "0 auto",
+            marginBottom: "30px",
+          }}
+        >
+          <Lottie
+            style={{ width: "min(150px, 70%)", zIndex: "999" }}
+            isClickToPauseDisabled={true}
+            options={{
+              loop: false,
+              autoplay: true,
+              animationData: animationData,
+              rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice",
+              },
+            }}
+          />
+          <h1 style={{ fontSize: 30, textAlign: "center" }}>
+            Registration Successful
+          </h1>
+          <p
+            style={{
+              fontSize: 17,
+              textAlign: "center",
+              marginTop: 10,
+              lineHeight: "1.5",
+            }}
+          >
+            You will get emails for further updates about the event. Hope you
+            will have a good time learning with us !
+          </p>
+        </div>
+      </Dialog>
+      <Toast ref={toast} />
       <Layout
         metaTitle={data.Event_name}
         metaDescription={data.Mini_description}
@@ -161,23 +228,13 @@ function Event({ data, APPLICATION_URL }) {
                   additional details. The registration fees for this event is{" "}
                   {registerPrice}
                 </p>
-                {data.Registration_price != 0 ? (
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: data.Registration_link,
-                    }}
-                  />
-                ) : (
-                  <Button
-                    label="Register"
-                    icon="pi pi-external-link"
-                    onClick={() => {
-                      window.open(data.Registration_link, "_blank");
-                    }}
-                    tooltip="opens registration form in new tab"
-                    tooltipOptions={{ position: "bottom" }}
-                  />
-                )}
+                <Button
+                  label="Register"
+                  icon="pi pi-external-link"
+                  onClick={() => setOpenRegistrationScreen(true)}
+                  tooltip="opens registration form in new tab"
+                  tooltipOptions={{ position: "bottom" }}
+                />
               </section>
             )}
           </main>
