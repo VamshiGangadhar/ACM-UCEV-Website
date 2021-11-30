@@ -224,16 +224,14 @@ function Event({ data, APPLICATION_URL, RAZORPAY_KEY_ID }) {
                 <h1>Register to This Event</h1>
                 <p>
                   To register to this event to participate, Press the Register
-                  button below. You will be taken to external site for
-                  additional details. The registration fees for this event is{" "}
-                  {registerPrice}
+                  button below. You will be shown a form for additional details.
+                  The registration fees for this event is {registerPrice}
                 </p>
                 <Button
                   label="Register"
-                  icon="pi pi-external-link"
+                  icon="pi pi-ticket"
                   onClick={() => setOpenRegistrationScreen(true)}
-                  tooltip="opens registration form in new tab"
-                  tooltipOptions={{ position: "bottom" }}
+                  tooltip="opens a form on this same page"
                 />
               </section>
             )}

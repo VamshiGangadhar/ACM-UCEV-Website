@@ -1,11 +1,12 @@
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { format } from "date-fns";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Chip } from "primereact/chip";
 import { Button } from "primereact/button";
 import loadScript from "../../utils/loadScript";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 function RegistrationScreen({
   setOpenRegistrationScreen,
@@ -28,24 +29,38 @@ function RegistrationScreen({
   const [collageName, setCollageName] = useState("");
   const [className, setClassName] = useState("");
   const [branch, setBranch] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // LOAD RAZORPAY SCRIPT IF EVENT HAS PRICE AT STARTUP
+  useEffect(() => {
+    async function loadRazorpayScript() {
+      if (event_price != 0) {
+        {
+          // LOAD THE RAZOR PAY SCRIPT
+          const res = await loadScript(
+            "https://checkout.razorpay.com/v1/checkout.js"
+          );
+          if (!res) {
+            alert("Razorpay SDK failed to load. Are you online?");
+            return;
+          }
+        }
+      }
+    }
+    loadRazorpayScript();
+  }, []);
 
   // WHEN REGISTER BTN CLICKED
   const handleRegisterClick = async () => {
+    setLoading(true);
     if (event_price == 0) {
       // TODO: SEND DATA TO SERVER
 
       // SET THE REGISTRATION SUCCESS MODAL TO TRUE
       setRegistrationSuccessModal(true);
+      setLoading(false);
       setOpenRegistrationScreen(false);
     } else {
-      // LOAD THE RAZOR PAY SCRIPT
-      const res = await loadScript(
-        "https://checkout.razorpay.com/v1/checkout.js"
-      );
-      if (!res) {
-        alert("Razorpay SDK failed to load. Are you online?");
-        return;
-      }
       // CREATE A NEW ORDER BY REQUESTING THE SERVER
       const result = await fetch(`${APPLICATION_URL}/api/payment`, {
         method: "POST",
@@ -62,7 +77,6 @@ function RegistrationScreen({
       }
       const order = await result.json();
       const { amount, id: order_id, currency } = order;
-
       // CREATE A NEW INSTANCE OF RAZOR PAY OBJECT WITH THE ORDER_ID CREATED BEFORE
       const paymentObject = new window.Razorpay({
         key: RAZORPAY_KEY_ID,
@@ -119,6 +133,7 @@ function RegistrationScreen({
       });
 
       // OPEN THE PAYMENT WINDOW
+      setLoading(false);
       paymentObject.open();
     }
   };
@@ -182,6 +197,18 @@ function RegistrationScreen({
               handleRegisterClick();
             }}
           >
+            {loading && (
+              <>
+                <div className="registrationScreen__overlay" />
+                <ProgressSpinner
+                  className="registrationScreen__loader"
+                  style={{ width: "50px", height: "50px" }}
+                  strokeWidth="8"
+                  fill="var(--surface-ground)"
+                  animationDuration=".5s"
+                />
+              </>
+            )}
             <div className="registrationScreen__field">
               <label htmlFor="fullName" className="registrationScreen__label">
                 Full Name
@@ -275,7 +302,9 @@ function RegistrationScreen({
             </div>
             <div className="registrationScreen__field">
               <Button
-                label={event_price == 0 ? "Register" : "Next"}
+                label={
+                  event_price == 0 ? "Register" : "Pay" + " ₹" + event_price
+                }
                 className="registrationScreen__RegisterButton"
                 type="submit"
               />
@@ -340,6 +369,24 @@ function RegistrationScreen({
           flex-direction: column;
           gap: 10px;
           max-width: 500px;
+        }
+        .registrationScreen__right {
+          position: relative;
+        }
+        .registrationScreen__overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-radius: 8px;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+        }
+        .registrationScreen__loader {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
         }
         .registrationScreen__field {
           width: 100%;
