@@ -12,6 +12,7 @@ function RegistrationScreen({
   setOpenRegistrationScreen,
   openRegistrationScreen,
   event_id,
+  toast,
   event_description,
   event_price,
   event_name,
@@ -54,15 +55,37 @@ function RegistrationScreen({
   const handleRegisterClick = async () => {
     setLoading(true);
     if (event_price == 0) {
-      // TODO: SEND DATA TO SERVER
+      // SEND DATA TO SERVER TO CREATE PARTICIPANT
+      const res = await fetch(`${APPLICATION_URL}/api/create-participant`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          event_id: event_id,
+          event_name: event_name,
+          event_tags: event_tags,
+          participant_fullName: fullName,
+          participant_email: email,
+          participant_phone: phone,
+          participant_collageName: collageName,
+          participant_class: className,
+          participant_branch: branch,
+        }),
+      });
 
-      // SET THE REGISTRATION SUCCESS MODAL TO TRUE
-      setRegistrationSuccessModal(true);
-      setLoading(false);
-      setOpenRegistrationScreen(false);
+      if (res.status === 200) {
+        // SET THE REGISTRATION SUCCESS MODAL TO TRUE
+        setRegistrationSuccessModal(true);
+        setLoading(false);
+        setOpenRegistrationScreen(false);
+      } else {
+        alert("Something went wrong. Please try again.");
+        setLoading(false);
+      }
     } else {
       // CREATE A NEW ORDER BY REQUESTING THE SERVER
-      const result = await fetch(`${APPLICATION_URL}/api/payment`, {
+      const result = await fetch(`${APPLICATION_URL}/api/create-order`, {
         method: "POST",
         headers: {},
         body: JSON.stringify({
@@ -106,19 +129,33 @@ function RegistrationScreen({
         // CALLBACK FUNCTION TO BE CALLED WHEN THE PAYMENT IS SUCCESSFUL
         handler: async function (response) {
           // SEND THE DATA TO THE SERVER FOR VERIFICATION
-          const result = await fetch(`${APPLICATION_URL}/api/verification`, {
-            method: "POST",
-            headers: {},
-            body: JSON.stringify({
-              orderCreationId: order_id,
-              razorpayPaymentId: response.razorpay_payment_id,
-              razorpayOrderId: response.razorpay_order_id,
-              razorpaySignature: response.razorpay_signature,
-            }),
-          });
-          let resultData = await result.json();
+          setLoading(true);
+          const verificationResponse = await fetch(
+            `${APPLICATION_URL}/api/verification`,
+            {
+              method: "POST",
+              headers: {},
+              body: JSON.stringify({
+                orderCreationId: order_id,
+                razorpayPaymentId: response.razorpay_payment_id,
+                razorpayOrderId: response.razorpay_order_id,
+                razorpaySignature: response.razorpay_signature,
+                event_id: event_id,
+                event_name: event_name,
+                event_tags: event_tags,
+                participant_fullName: fullName,
+                participant_email: email,
+                participant_phone: phone,
+                participant_collageName: collageName,
+                participant_class: className,
+                participant_branch: branch,
+              }),
+            }
+          );
+          let verificationResponseData = await verificationResponse.json();
+          setLoading(false);
           // IF VERIFICATION DONE, SHOW SUCCESS MODAL
-          if (result.status == 200) {
+          if (verificationResponse.status == 200) {
             setRegistrationSuccessModal(true);
             setOpenRegistrationScreen(false);
           } else {
@@ -126,7 +163,8 @@ function RegistrationScreen({
             toast.current.show({
               severity: "error",
               summary: "Registration Failed",
-              detail: `${resultData.msg}. Please contact event managers for any queries about this payment.`,
+              detail: `${verificationResponseData.msg}`,
+              sticky: true,
             });
           }
         },

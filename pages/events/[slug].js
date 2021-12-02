@@ -129,6 +129,7 @@ function Event({ data, APPLICATION_URL, RAZORPAY_KEY_ID }) {
       <RegistrationScreen
         setOpenRegistrationScreen={setOpenRegistrationScreen}
         openRegistrationScreen={openRegistrationScreen}
+        toast={toast}
         event_name={data.Event_name}
         event_tags={data.event_tags}
         event_id={data.id}
