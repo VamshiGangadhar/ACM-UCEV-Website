@@ -69,6 +69,7 @@ export const getStaticProps = async ({ params }) => {
     query: gql`
       {
         events(where: { Slug: "${params.slug}" }) {
+          id
           Event_name
           Cover_image {
             url

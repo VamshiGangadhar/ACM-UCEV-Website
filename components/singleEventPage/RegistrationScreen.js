@@ -62,9 +62,9 @@ function RegistrationScreen({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          event_id: event_id,
-          event_name: event_name,
-          event_tags: event_tags,
+          event_id,
+          event_name,
+          event_tags,
           participant_fullName: fullName,
           participant_email: email,
           participant_phone: phone,

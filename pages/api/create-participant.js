@@ -20,7 +20,7 @@ export default function handler(req, res) {
           console.error("something went wrong: " + err);
           return;
         } else {
-          console.log("Successfully connected!");
+          console.log("Sheets API Successfully connected!");
         }
       });
 
@@ -37,7 +37,9 @@ export default function handler(req, res) {
                 {
                   addSheet: {
                     properties: {
-                      title: req.body.event_name,
+                      title: `${
+                        typeof req.body.order_id !== "undefined" ? "💰" : "🆓"
+                      } ${req.body.event_name}`,
                     },
                   },
                 },
@@ -46,7 +48,8 @@ export default function handler(req, res) {
           },
           (err, response) => {
             // ###################### 1st Callback ######################
-            if (err) res.status(500).send("CREATE NEW SHEET ERROR: " + err);
+            if (err)
+              res.status(500).send({ msg: "CREATE NEW SHEET ERROR: " + err });
 
             // GET THE ID OF THE NEW SHEET
             let newSheetId =
@@ -58,7 +61,9 @@ export default function handler(req, res) {
               {
                 auth: jwtClient,
                 spreadsheetId: process.env.SPREADSHEET_ID,
-                range: req.body.event_name,
+                range: `${
+                  typeof req.body.order_id !== "undefined" ? "💰" : "🆓"
+                } ${req.body.event_name}`,
                 valueInputOption: "RAW",
                 insertDataOption: "INSERT_ROWS",
                 resource: {
@@ -84,7 +89,9 @@ export default function handler(req, res) {
               (err) => {
                 // ################### 2rd Callback ###################
                 if (err)
-                  res.status(500).send("APPEND NEW SHEET LABELS ERROR: " + err);
+                  res
+                    .status(500)
+                    .send({ msg: "APPEND NEW SHEET LABELS ERROR: " + err });
 
                 // FREEZE AND FORMAT THE FIRST ROW OF NEWLY CREATED SHEET
                 console.info(
@@ -174,9 +181,9 @@ export default function handler(req, res) {
                   (err) => {
                     // ###################### 3nd Callback ######################
                     if (err)
-                      res
-                        .status(500)
-                        .send("FORMATTING 1st ROW OF NEW SHEET ERROR: " + err);
+                      res.status(500).send({
+                        msg: "FORMATTING 1st ROW OF NEW SHEET ERROR: " + err,
+                      });
 
                     // ADD THE PARTICIPANT TO THE SHEET AGAIN
                     console.info(
@@ -194,6 +201,7 @@ export default function handler(req, res) {
       // ADD PARTICIPANTS TO SHEET FUNCTION (NOT CALLING IT YET)
       // COUNT IS USED TO TRY AGAIN IF SHEET DOESN'T EXIST AND TO PREVENT AN INFINITE LOOP
       let addParticipantsToSheet = (count, newSheetId) => {
+        console.info("Adding participants to the sheet...");
         // get a new date (locale machine date time)
         // get the date as a string
         // get the time as a string
@@ -211,7 +219,9 @@ export default function handler(req, res) {
           {
             auth: jwtClient,
             spreadsheetId: process.env.SPREADSHEET_ID,
-            range: req.body.event_name,
+            range: `${typeof req.body.order_id !== "undefined" ? "💰" : "🆓"} ${
+              req.body.event_name
+            }`,
             valueInputOption: "RAW",
             insertDataOption: "INSERT_ROWS",
             resource: {
@@ -234,18 +244,24 @@ export default function handler(req, res) {
               ],
             },
           },
-          (err, response) => {
+          (err) => {
             if (err) {
               if (
-                err == `Error: Unable to parse range: ${req.body.event_name}` &&
-                count < 3
+                (err ==
+                  "Error: Unable to parse range: " +
+                    typeof req.body.order_id) !==
+                "undefined"
+                  ? "💰 "
+                  : "🆓 " + req.body.event_name && count < 3
               ) {
                 // CREATE THE SHEET IF IT DOESN'T EXIST
                 console.info("Sheet not found, creating one");
                 createSheet(count);
               } else {
                 console.error("ERROR creating participant: " + err);
-                res.status(500).send("ERROR creating participant: " + err);
+                res
+                  .status(500)
+                  .send({ msg: "ERROR creating participant: " + err });
               }
             } else {
               console.log("Successfully added new participant!");
@@ -325,10 +341,15 @@ export default function handler(req, res) {
                       console.info(
                         "Successfully cleared styles from header row!"
                       );
-                    res.status(200).send("Successfully added participant!");
+                    res
+                      .status(200)
+                      .send({ msg: "Successfully added participant!" });
                   }
                 );
-              } else res.status(200).send("Successfully added participant!");
+              } else
+                res
+                  .status(200)
+                  .send({ msg: "Successfully added participant!" });
             }
           }
         );
