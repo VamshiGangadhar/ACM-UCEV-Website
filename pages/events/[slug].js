@@ -379,6 +379,7 @@ function Event({ data, APPLICATION_URL, RAZORPAY_KEY_ID }) {
         @media only screen and (max-width: 750px) {
           .event {
             flex-direction: column;
+            padding: 18px;
           }
           .event__right {
             position: static;

@@ -108,7 +108,7 @@ function RegistrationScreen({
         amount: amount,
         currency: currency,
         name: event_name,
-        description: event_description,
+        description: event_tags.map((tag) => tag.Tag_name).join(", "),
         order_id: order_id,
         prefill: {
           name: fullName,
