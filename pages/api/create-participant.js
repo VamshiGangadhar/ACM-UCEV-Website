@@ -195,10 +195,10 @@ export default function handler(req, res) {
       // COUNT IS USED TO TRY AGAIN IF SHEET DOESN'T EXIST AND TO PREVENT AN INFINITE LOOP
       let addParticipantsToSheet = (count, newSheetId) => {
         // get a new date (locale machine date time)
-        var date = new Date();
         // get the date as a string
-        var dt = date.toDateString();
         // get the time as a string
+        var date = new Date();
+        var dt = date.toDateString();
         var time = date.toLocaleTimeString();
 
         google.sheets("v4").spreadsheets.values.append(
@@ -230,86 +230,99 @@ export default function handler(req, res) {
           },
           (err, response) => {
             if (err) {
-              console.log("The API returned an error: " + err);
               if (
                 err == `Error: Unable to parse range: ${req.body.event_name}` &&
                 count < 3
               ) {
-                console.info("Sheet not found, creating one");
                 // CREATE THE SHEET IF IT DOESN'T EXIST
+                console.info("Sheet not found, creating one");
                 createSheet(count);
               } else {
-                res.status(500).send("The API returned an error: " + err);
+                console.error("ERROR creating participant: " + err);
+                res.status(500).send("ERROR creating participant: " + err);
               }
             } else {
               console.log("Successfully added new participant!");
 
-              if (newSheetId)
-                google.sheets("v4").spreadsheets.batchUpdate({
-                  auth: jwtClient,
-                  spreadsheetId: process.env.SPREADSHEET_ID,
-                  requestBody: {
-                    requests: [
-                      {
-                        updateSheetProperties: {
-                          fields: "gridProperties.frozenRowCount",
-                          properties: {
-                            sheetId: newSheetId,
-                            gridProperties: {
-                              frozenRowCount: 1,
+              if (newSheetId) {
+                // CLEARING STYLES FROM HEADER ROW OF THE NEW SHEET
+                console.info("Clearing styles from header row of the sheet...");
+                google.sheets("v4").spreadsheets.batchUpdate(
+                  {
+                    auth: jwtClient,
+                    spreadsheetId: process.env.SPREADSHEET_ID,
+                    requestBody: {
+                      requests: [
+                        {
+                          updateSheetProperties: {
+                            fields: "gridProperties.frozenRowCount",
+                            properties: {
+                              sheetId: newSheetId,
+                              gridProperties: {
+                                frozenRowCount: 1,
+                              },
                             },
                           },
                         },
-                      },
-                      {
-                        repeatCell: {
-                          range: {
-                            sheetId: newSheetId,
-                            startRowIndex: 1,
-                            endRowIndex: 1000,
-                          },
-                          cell: {
-                            userEnteredFormat: {
-                              backgroundColor: {
-                                red: 1,
-                                green: 1,
-                                blue: 1,
-                              },
-                              horizontalAlignment: "LEFT",
-                              verticalAlignment: "MIDDLE",
-                              textFormat: {
-                                foregroundColor: {
-                                  red: 0,
-                                  green: 0,
-                                  blue: 0,
+                        {
+                          repeatCell: {
+                            range: {
+                              sheetId: newSheetId,
+                              startRowIndex: 1,
+                              endRowIndex: 1000,
+                            },
+                            cell: {
+                              userEnteredFormat: {
+                                backgroundColor: {
+                                  red: 1,
+                                  green: 1,
+                                  blue: 1,
                                 },
-                                fontSize: 12,
-                                bold: false,
+                                horizontalAlignment: "LEFT",
+                                verticalAlignment: "MIDDLE",
+                                textFormat: {
+                                  foregroundColor: {
+                                    red: 0,
+                                    green: 0,
+                                    blue: 0,
+                                  },
+                                  fontSize: 12,
+                                  bold: false,
+                                },
                               },
                             },
+                            fields:
+                              "userEnteredFormat(backgroundColor,textFormat,horizontalAlignment,verticalAlignment)",
                           },
-                          fields:
-                            "userEnteredFormat(backgroundColor,textFormat,horizontalAlignment,verticalAlignment)",
                         },
-                      },
-                      {
-                        updateDimensionProperties: {
-                          range: {
-                            sheetId: newSheetId,
-                            dimension: "ROWS",
-                            startIndex: 1,
-                            endIndex: 1000,
+                        {
+                          updateDimensionProperties: {
+                            range: {
+                              sheetId: newSheetId,
+                              dimension: "ROWS",
+                              startIndex: 1,
+                              endIndex: 1000,
+                            },
+                            properties: {
+                              pixelSize: 30,
+                            },
+                            fields: "pixelSize",
                           },
-                          properties: {
-                            pixelSize: 30,
-                          },
-                          fields: "pixelSize",
                         },
-                      },
-                    ],
+                      ],
+                    },
                   },
-                });
-              res.status(200).send(response);
+                  (err) => {
+                    if (err)
+                      res.status(500).send("ERROR clearing styles: " + err);
+                    else
+                      console.info(
+                        "Successfully cleared styles from header row!"
+                      );
+                    res.status(200).send("Successfully added participant!");
+                  }
+                );
+              } else res.status(200).send("Successfully added participant!");
             }
           }
         );
