@@ -198,8 +198,14 @@ export default function handler(req, res) {
         // get the date as a string
         // get the time as a string
         var date = new Date();
-        var dt = date.toDateString();
-        var time = date.toLocaleTimeString();
+        var time = date.toLocaleTimeString("en-IN", {
+          timeZone: "Asia/Kolkata",
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
 
         google.sheets("v4").spreadsheets.values.append(
           {
@@ -211,7 +217,7 @@ export default function handler(req, res) {
             resource: {
               values: [
                 [
-                  dt + " " + time,
+                  time,
                   req.body.participant_fullName,
                   req.body.participant_email,
                   req.body.participant_phone,
