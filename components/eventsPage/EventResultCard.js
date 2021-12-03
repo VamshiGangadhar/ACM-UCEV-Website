@@ -65,7 +65,7 @@ function EventResultCard({
         }
         .eventResultCard_desc {
           font-size: min(16px, 4.8vw);
-          margin-bottom: 10px;
+          margin: 10px 0;
           line-height: 1.5;
           color: #222222;
         }
@@ -75,8 +75,8 @@ function EventResultCard({
         .eventResultCard_eventTimings {
           display: flex;
           align-items: center;
-          gap: 10px;
           margin-bottom: 20px;
+          gap: 10px;
         }
         .eventResultCard_startTime,
         .eventResultCard_endTime {
