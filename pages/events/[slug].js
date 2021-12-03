@@ -289,6 +289,7 @@ function Event({ data, APPLICATION_URL, RAZORPAY_KEY_ID }) {
           margin-top: 20px;
           border-radius: 6px;
           overflow: hidden;
+          background-color: #cccccc;
         }
         /* EVENT MARKDOWN STYLES START */
         .event__description {
