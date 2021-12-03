@@ -6,6 +6,7 @@ export default function handler(req, res) {
         key_id: process.env.RAZORPAY_KEY_ID,
         key_secret: process.env.RAZORPAY_SECRET,
       });
+      // TODO: CHECK IF USER EMAIL IS IN ACM MEMBERSHIP THEN REDUCE THE PRICE
       async function createOrder() {
         const order = await instance.orders.create({
           amount: JSON.parse(req.body).amount,

@@ -82,6 +82,9 @@ export default function handler(req, res) {
                       typeof req.body.payment_id !== "undefined"
                         ? "Payment ID"
                         : "",
+                      typeof req.body.payment_id !== "undefined"
+                        ? "Price Paid"
+                        : "",
                     ],
                   ],
                 },
@@ -239,6 +242,9 @@ export default function handler(req, res) {
                     : "",
                   typeof req.body.payment_id !== "undefined"
                     ? req.body.payment_id
+                    : "",
+                  typeof req.body.payment_id !== "undefined"
+                    ? req.body.price_paid
                     : "",
                 ],
               ],

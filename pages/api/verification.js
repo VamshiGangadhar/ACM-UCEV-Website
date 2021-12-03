@@ -16,6 +16,7 @@ export default function handler(req, res) {
         participant_collageName,
         participant_class,
         participant_branch,
+        price_paid,
       } = JSON.parse(req.body);
 
       console.table({
@@ -31,6 +32,7 @@ export default function handler(req, res) {
         participant_collageName,
         participant_class,
         participant_branch,
+        price_paid,
       });
       // CREATE DIGEST FROM THE PAYMENT DETAILS
       // The format should be like this:
@@ -72,6 +74,7 @@ export default function handler(req, res) {
               participant_collageName,
               participant_class,
               participant_branch,
+              price_paid,
               order_id: razorpayOrderId,
               payment_id: razorpayPaymentId,
             }),

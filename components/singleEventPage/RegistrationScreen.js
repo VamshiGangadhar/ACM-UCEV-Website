@@ -85,11 +85,13 @@ function RegistrationScreen({
       }
     } else {
       // CREATE A NEW ORDER BY REQUESTING THE SERVER
+      // TODO: CHECK IF USER EMAIL IS IN ACM MEMBERSHIP THEN REDUCE THE PRICE
       const result = await fetch(`${APPLICATION_URL}/api/create-order`, {
         method: "POST",
         headers: {},
         body: JSON.stringify({
           event_id: event_id,
+          participant_email: email,
           amount: event_price * 100,
           currency: "INR",
         }),
@@ -149,6 +151,7 @@ function RegistrationScreen({
                 participant_collageName: collageName,
                 participant_class: className,
                 participant_branch: branch,
+                price_paid: amount,
               }),
             }
           );
