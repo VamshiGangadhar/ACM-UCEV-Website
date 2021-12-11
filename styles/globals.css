@@ -199,7 +199,7 @@ select {
   max-width: 100%;
 }
 .markdown p {
-  font-size: min(18px, 4.6vw);
+  font-size: min(18px, 4.8vw);
   line-height: 27px;
   margin: 10px 0;
   color: #222222;
@@ -259,8 +259,8 @@ select {
 }
 .markdown li {
   margin: 5px 0;
-  font-size: 18px;
   line-height: 27px;
+  font-size: min(18px, 4.8vw);
 }
 .markdown pre {
   font-size: min(15px, 3.8vw);

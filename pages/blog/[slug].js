@@ -201,6 +201,7 @@ function BlogPost({ data, APPLICATION_URL }) {
           .blogPost__title {
             font-size: min(35px, 8vw);
             font-weight: bold;
+            line-height: 32px;
             margin-bottom: 10px;
           }
           .blogPost__authors {

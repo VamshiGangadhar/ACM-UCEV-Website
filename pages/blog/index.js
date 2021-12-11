@@ -45,7 +45,6 @@ export const getStaticProps = async () => {
   };
 };
 function blogIndex({ postsOverview, APPLICATION_URL }) {
-  console.log(postsOverview);
   return (
     <>
       <Layout

@@ -62,6 +62,7 @@ function EventResultCard({
           font-size: min(20px, 6vw);
           color: #333333;
           margin: 10px 0;
+          line-height: 1.1;
         }
         .eventResultCard_desc {
           font-size: min(16px, 4.8vw);
