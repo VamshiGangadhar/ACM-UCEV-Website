@@ -7,6 +7,7 @@ import Hero from "../components/homePage/Hero";
 import SubscribeNewsLetter from "../components/widgets/SubscribeNewsLetter";
 import UpcommingEvents from "../components/homePage/UpcommingEvents";
 import Layout from "../components/layout/Layout";
+import LatestBlogPosts from "../components/homePage/LatestBlogPosts";
 
 export const getStaticProps = async () => {
   const client = new ApolloClient({
@@ -21,6 +22,29 @@ export const getStaticProps = async () => {
           photos {
             url
           }
+        }
+        posts(sort: "created_at:desc", limit: 5) {
+          id
+          Title
+          Slug
+          created_at
+          updated_at
+          Description
+          authors {
+            id
+            Author_name
+            Author_image {
+              url
+            }
+          }
+          tags {
+            id
+            Tag_name
+          }
+          Cover_image {
+            url
+          }
+          Mini_description
         }
         events(sort: "Start_time:asc") {
           id
@@ -40,12 +64,18 @@ export const getStaticProps = async () => {
   return {
     props: {
       eventsOverview: data.events,
+      postsOverview: data.posts,
       homepageAlbum: data.homepageAlbum,
       APPLICATION_URL: process.env.APPLICATION_URL,
     },
   };
 };
-function Home({ eventsOverview, homepageAlbum, APPLICATION_URL }) {
+function Home({
+  eventsOverview,
+  homepageAlbum,
+  APPLICATION_URL,
+  postsOverview,
+}) {
   return (
     <>
       <Layout APPLICATION_URL={APPLICATION_URL}>
@@ -69,6 +99,7 @@ function Home({ eventsOverview, homepageAlbum, APPLICATION_URL }) {
             (event) => Date.now() < new Date(event.Start_time)
           ).length != 0 && <UpcommingEvents events={eventsOverview} />}
           <SubscribeNewsLetter />
+          <LatestBlogPosts data={postsOverview} />
         </div>
       </Layout>
       <style jsx>{`
