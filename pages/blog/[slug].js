@@ -167,7 +167,10 @@ function BlogPost({ data, APPLICATION_URL }) {
           <div className="blogPost__coverImg">
             <Image src={data.Cover_image.url} layout="fill" objectFit="cover" />
           </div>
-          <ReactMarkdown className="post__description" components={CodeBlock}>
+          <ReactMarkdown
+            className="post__description markdown"
+            components={CodeBlock}
+          >
             {data.Description}
           </ReactMarkdown>
         </article>
@@ -247,82 +250,14 @@ function BlogPost({ data, APPLICATION_URL }) {
             width: 100%;
             position: relative;
             height: 300px;
-            margin: 20px 0;
+            margin: 20px 0 30px 0;
           }
           .blogPost__coverImg img {
             border-radius: 6px;
             display: block;
             margin: 0 auto;
           }
-          /* post MARKDOWN STYLES START */
-          .post__description {
-            border-radius: 6px;
-            margin-top: 20px;
-            max-width: 90vw;
-          }
-          .post__description * {
-            max-width: 100%;
-          }
-          .post__description p {
-            font-size: min(18px, 4.8vw);
-            line-height: 27px;
-            margin: 10px 0;
-            color: #222222;
-          }
-          .post__description h1,
-          .post__description h2,
-          .post__description h3 {
-            color: #444444;
-          }
-          .post__description h1 {
-            font-size: min(28px, 7vw);
-            margin-top: 25px;
-            margin-bottom: 20px;
-          }
-          .post__description h2 {
-            font-size: min(22px, 6.5vw);
-            margin-top: 15px;
-            margin-bottom: 10px;
-          }
-          .post__description h3 {
-            font-size: min(18px, 6vw);
-            margin-top: 15px;
-            margin-bottom: 10px;
-          }
-          .post__description img {
-            display: block;
-            margin: 0 auto;
-            max-height: 500px;
-            border-radius: 6px;
-            overflow: hidden;
-          }
-          .post__description ol,
-          .post__description ul {
-            padding-left: 20px;
-          }
-          .post__description li {
-            margin: 5px 0;
-            font-size: 18px;
-            line-height: 27px;
-          }
-          .post__description pre {
-            font-size: min(15px, 3.8vw);
-          }
-          .post__description pre code {
-            background-color: inherit;
-            white-space: normal;
-          }
-          .post__description code {
-            word-break: break-word;
-            background-color: #eee;
-            font-family: monospace;
-            font-size: min(15px, 3.8vw);
-            color: #f73838;
-            padding: 2px 4px;
-            border-radius: 4px;
-            font-weight: 500;
-          }
-          /* post MARKDOWN STYLES END */
+
           .blogPost__comments {
             margin-top: 0;
           }

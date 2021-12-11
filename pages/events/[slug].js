@@ -217,7 +217,7 @@ function Event({ data, APPLICATION_URL, RAZORPAY_KEY_ID }) {
             </div>
             <ReactMarkdown
               components={CodeBlock}
-              className="event__description"
+              className="event__description markdown"
             >
               {data.Description}
             </ReactMarkdown>
@@ -291,77 +291,7 @@ function Event({ data, APPLICATION_URL, RAZORPAY_KEY_ID }) {
           overflow: hidden;
           background-color: #cccccc;
         }
-        /* EVENT MARKDOWN STYLES START */
-        .event__description {
-          background-color: #eeeeee;
-          padding: 20px;
-          border-radius: 6px;
-          margin-top: 20px;
-          max-width: 90vw;
-        }
-        .event__description * {
-          max-width: 100%;
-        }
-        .event__description p {
-          font-size: min(16px, 4.5vw);
-          line-height: 27px;
-          margin: 10px 0;
-          color: #222222;
-        }
-        .event__description h1,
-        .event__description h2,
-        .event__description h3 {
-          color: #444444;
-        }
-        .event__description h1 {
-          font-size: min(28px, 7vw);
-          margin-top: 25px;
-          margin-bottom: 20px;
-        }
-        .event__description h2 {
-          font-size: min(22px, 6.5vw);
-          margin-top: 15px;
-          margin-bottom: 10px;
-        }
-        .event__description h3 {
-          font-size: min(18px, 6vw);
-          margin-top: 15px;
-          margin-bottom: 10px;
-        }
-        .event__description img {
-          display: block;
-          margin: 0 auto;
-          max-height: 500px;
-          border-radius: 6px;
-          overflow: hidden;
-        }
-        .event__description ol,
-        .event__description ul {
-          padding-left: 20px;
-        }
-        .event__description li {
-          margin: 5px 0;
-          font-size: min(16px, 4.5vw);
-          line-height: 27px;
-        }
-        .event__description pre {
-          font-size: min(15px, 3.8vw);
-        }
-        .event__description pre code {
-          background-color: inherit;
-          white-space: normal;
-        }
-        .event__description code {
-          word-break: break-word;
-          background-color: #eee;
-          font-family: monospace;
-          font-size: min(15px, 3.8vw);
-          color: #f73838;
-          padding: 2px 4px;
-          border-radius: 4px;
-          font-weight: 500;
-        }
-        /* event MARKDOWN STYLES END */
+
         .event__registerSection {
           margin: 20px 0;
         }
