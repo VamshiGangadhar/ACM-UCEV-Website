@@ -52,7 +52,7 @@ function LatestBlogPosts({ data }) {
         .latestBlogPosts__posts {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          grid-gap: 10px;
+          grid-gap: 20px;
         }
         .latestBlogPosts__button {
           text-align: center;

@@ -20,7 +20,12 @@ function NoEventsFound({
           {filterStatus.length != 0 ? (
             <>
               <p className="noEventsFound__DetailedMessage">
-                No results found for &quot;{truncateString(searchEntry, 100)}
+                No results found for &quot;
+                <span
+                  style={{ wordWrap: "break-word", wordBreak: "break-all" }}
+                >
+                  {truncateString(searchEntry, 100)}
+                </span>
                 &quot;. Try a different search or cancel the search below.
               </p>
               <Button
@@ -71,10 +76,6 @@ function NoEventsFound({
           max-width: 100%;
           line-height: 1.5;
           margin-bottom: 20px;
-        }
-        .noEventsFound__DetailedMessage {
-          word-wrap: break-word;
-          word-break: break-all;
         }
         .noEventsFound__Illustration {
           max-width: min(300px, 70vw);

@@ -81,7 +81,7 @@ function UpcommingEvents({ events }) {
           }
           .upcommingEvents__img {
             width: 100%;
-            padding: 40px;
+            padding: 20px 40px 0px 40px;
           }
           .upcommingEvents__desc {
             font-size: min(18px, 4.8vw);
@@ -125,15 +125,10 @@ function UpcommingEvents({ events }) {
           @media only screen and (max-width: 650px) {
             .upcommingEvents {
               flex-direction: column;
-            }
-            .upcommingEvents__img {
-              padding: 40px;
+              gap: 0px;
             }
           }
           @media only screen and (max-width: 400px) {
-            .upcommingEvents {
-              flex-direction: column;
-            }
             .upcommingEvents__img {
               padding: 10px;
             }

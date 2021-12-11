@@ -88,7 +88,7 @@ function aboutChapter({ photos }) {
           line-height: 1.5;
           margin-bottom: 10px;
         }
-        @media only screen and (max-width: 700px) {
+        @media only screen and (max-width: 800px) {
           .aboutChapter {
             flex-direction: column;
           }
@@ -96,7 +96,7 @@ function aboutChapter({ photos }) {
             padding: 20px;
           }
           .aboutChapter__title {
-            margin-top: 20px;
+            margin-top: 15px;
           }
           .aboutChapter__galleryImage {
             min-height: 300px;

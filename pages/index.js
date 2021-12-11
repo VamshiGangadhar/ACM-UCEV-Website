@@ -117,7 +117,7 @@ function Home({
         .home__container {
           padding: 20px;
         }
-        @media only screen and (max-width: 400px) {
+        @media only screen and (max-width: 700px) {
           .home__about {
             flex-direction: column;
           }
