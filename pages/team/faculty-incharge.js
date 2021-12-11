@@ -19,7 +19,7 @@ function facultyInCharge({ APPLICATION_URL }) {
         APPLICATION_URL={APPLICATION_URL}
       >
         <div className="hodMessage">
-          <h1 className="hodMessage__title">HOD Message</h1>
+          <h1 className="hodMessage__title">Faculty Coordinator Message</h1>
           <div className="hodMessage__content">
             <div className="hodMessage__imgText">
               <p className="hodMessage__text">
@@ -72,14 +72,14 @@ function facultyInCharge({ APPLICATION_URL }) {
             width: min(900px, 100%);
             margin: 30px auto;
             padding: min(30px);
-            border-radius: 12px;
-            border: 1px solid #ccc;
           }
           .hodMessage__title {
             color: #3792c1;
             font-weight: 900;
             font-size: min(30px, 8vw);
             margin-bottom: 20px;
+            border-bottom: 1px solid #3792c1;
+            padding-bottom: 10px;
           }
           .hodMessage__imgText {
             flex: 1;
@@ -124,7 +124,7 @@ function facultyInCharge({ APPLICATION_URL }) {
             flex: 1;
             font-size: 18px;
             line-height: 1.5;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
           }
           .hodMessage__map {
             width: 100%;
@@ -146,10 +146,6 @@ function facultyInCharge({ APPLICATION_URL }) {
               font-size: 16px;
               margin-bottom: 30px;
               line-height: 1.5;
-            }
-            .hodMessage__title {
-              border-bottom: 1px solid #3792c1;
-              padding-bottom: 15px;
             }
           }
         `}

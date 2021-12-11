@@ -63,9 +63,9 @@ function ourTeam({ teamMembers, APPLICATION_URL }) {
             <div className="ourTeam__introduction">
               <h1 className="ourTeam__title">Our team</h1>
               <p className="ourTeam__description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
-                dignissimos corporis sit perferendis obcaecati praesentium illo
-                numquam, voluptatem omnis ea.
+                We are a group of students from JNTUK UCEV who are passionate
+                about technology and computer science. Know more about us in
+                this page.
               </p>
             </div>
           </div>
