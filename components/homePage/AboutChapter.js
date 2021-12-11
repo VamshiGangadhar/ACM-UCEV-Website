@@ -3,7 +3,15 @@ import { Galleria } from "primereact/galleria";
 import Image from "next/image";
 function aboutChapter({ photos }) {
   let itemTemplate = (item) => {
-    return <Image src={item?.url} alt="photo" objectFit="cover" className="aboutChapter__galleryImage" layout="fill" />;
+    return (
+      <Image
+        src={item?.url}
+        alt="photo"
+        objectFit="cover"
+        className="aboutChapter__galleryImage"
+        layout="fill"
+      />
+    );
   };
   return (
     <>
@@ -23,10 +31,13 @@ function aboutChapter({ photos }) {
         <div className="aboutChapter__content">
           <h1 className="aboutChapter__title">About our Chapter</h1>
           <p className="aboutChapter__text">
-            ACM Student Chapter, JNTUK UCEV is an official student body inaugurated in 2021 under the University Collage
-            JNTUK UCEV. The chapter will conduct events including programming contests, talks by renowned speakers,
-            workshops etc.which give the students an exposure to the competitive computing world as well as allow them
-            to understand the advancements going on in the computing sphere worldwide.
+            ACM Student Chapter, JNTUK UCEV is an official student body
+            inaugurated in 2021 under the University Collage JNTUK UCEV. The
+            chapter will conduct events including programming contests, talks by
+            renowned speakers, workshops etc.which give the students an exposure
+            to the competitive computing world as well as allow them to
+            understand the advancements going on in the computing sphere
+            worldwide.
           </p>
         </div>
       </div>
@@ -83,6 +94,9 @@ function aboutChapter({ photos }) {
           }
           .aboutChapter__content {
             padding: 20px;
+          }
+          .aboutChapter__title {
+            margin-top: 20px;
           }
           .aboutChapter__galleryImage {
             min-height: 300px;
