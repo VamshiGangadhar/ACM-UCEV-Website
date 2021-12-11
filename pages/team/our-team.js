@@ -61,7 +61,7 @@ function ourTeam({ teamMembers, APPLICATION_URL }) {
               />
             </div>
             <div className="ourTeam__introduction">
-              <h1 className="ourTeam__title">Our team</h1>
+              <h1 className="ourTeam__title">Our Team</h1>
               <p className="ourTeam__description">
                 We are a group of students from JNTUK UCEV who are passionate
                 about technology and computer science. Know more about us in
@@ -111,6 +111,7 @@ function ourTeam({ teamMembers, APPLICATION_URL }) {
         .ourTeam__title {
           font-size: min(30px, 8vw);
           margin-bottom: 20px;
+          color: #3792c1;
         }
         .ourTeam__description {
           font-size: min(17px, 4.8vw);
