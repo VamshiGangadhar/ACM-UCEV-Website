@@ -39,7 +39,7 @@ function LatestBlogPosts({ data }) {
           flex: 1;
           max-width: 1200px;
           margin: 0 auto;
-          margin-block: 40px;
+          margin-block: 20px;
         }
         .latestBlogPosts__title {
           font-size: min(30px, 9vw);
