@@ -202,6 +202,7 @@ select {
 }
 .markdown * {
   max-width: 100%;
+  word-break: break-word;
 }
 .markdown p {
   font-size: min(18px, 4.8vw);
