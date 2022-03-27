@@ -43,7 +43,7 @@ function LatestBlogPosts({ data }) {
         }
         .latestBlogPosts__title {
           font-size: min(30px, 9vw);
-          margin-bottom: 40px;
+          margin-bottom: 30px;
           border-top: 1px solid #e2e2e2;
           border-bottom: 1px solid #e2e2e2;
           padding: 20px 0;
