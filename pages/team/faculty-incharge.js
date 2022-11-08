@@ -40,10 +40,10 @@ function facultyInCharge({ APPLICATION_URL }) {
               <div className="hodMessage__imgAndCaption">
                 <Image src="/imgs/hod_image.jpg" height="200" width="300" />
                 <div className="hodMessage__caption">
-                  <h4>Dr.G.Jaya Suma </h4>
+                  <h4>Dr. B. Tirimula Rao</h4>
                   <p>
-                    Professor, HoD & OSD-JNTUK, Kurupam JNTUK University College
-                    of Engineering
+                    Assistant Professor, & HoD
+                    JNTU-GV College of Engineering Vizianagaram
                   </p>
                 </div>
               </div>
