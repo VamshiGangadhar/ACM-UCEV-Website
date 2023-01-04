@@ -11,18 +11,44 @@ export const getStaticProps = async () => {
   const { data } = await client.query({
     query: gql`
       {
-        ourTeams {
-          Member_name
-          Member_position
-          Member_image {
-            url
-          }
-          About_member
-          Social_links {
-            Name_of_social
-            Social_url
+        {
+  ourTeams{
+    data{
+      attributes{
+        Member_name
+      }
+    }
+    data{
+      attributes{
+        Member_position
+      }
+    }
+    data{
+      attributes{
+        Member_image{
+          data{
+            attributes{
+              url
+            }
           }
         }
+      }
+    }
+    data{
+      attributes{
+        About_member
+      }
+    }
+    data{
+      attributes{
+        Social_links{
+          Name_of_social
+          Social_url
+        }
+      }
+    }
+  }
+}
       }
     `,
   });
