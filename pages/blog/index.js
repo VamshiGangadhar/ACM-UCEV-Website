@@ -11,30 +11,89 @@ export const getStaticProps = async () => {
   const { data } = await client.query({
     query: gql`
       {
-        posts(sort: "created_at:desc") {
-          id
-          Title
-          Slug
-          created_at
-          updated_at
-          Description
-          authors {
-            id
-            Author_name
-            Author_image {
+  posts(sort: "createdAt:desc"){
+    data{
+      id
+    }
+    data{
+      attributes{
+        Title
+       }
+     }
+    data{
+      attributes{
+        Slug
+      }
+    }
+    data{
+      attributes{
+        createdAt
+      }
+    }
+    data{
+      attributes{
+        Description
+      }
+    }
+    data{
+      attributes{
+        authors{
+          data{id}
+          data{
+            attributes{
+              Author_name
+            }
+          }
+          data{
+            attributes{
+              Author_image{
+                data{
+                  attributes{
+                    url
+                  }
+                }
+              }
+            }
+          }
+          data{
+            attributes{
+              Author_bio
+            }
+          }
+        }
+      }
+    }
+    data{
+      attributes{
+        tags{
+          data{id}
+          data{
+            attributes{
+              Tag_name
+            }
+          }
+        }
+      }
+    }
+    data{
+      attributes{
+        Cover_image{
+          data{
+            attributes{
               url
             }
           }
-          tags {
-            id
-            Tag_name
-          }
-          Cover_image {
-            url
-          }
-          Mini_description
         }
       }
+    }
+    data{
+      attributes{
+        Mini_description
+      }
+    }
+    }
+  }
+
     `,
   });
   return {
