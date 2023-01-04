@@ -18,9 +18,17 @@ export const getStaticProps = async () => {
   const { data } = await client.query({
     query: gql`
       {
-        homepageAlbum {
-          photos {
-            url
+        homepageAlbum{
+          data{
+            attributes{
+               photos{
+                  data{
+                    attributes{
+                      url
+                      }
+                   }
+                }
+             }
           }
         }
         posts(sort: "created_at:desc", limit: 5) {
