@@ -26,13 +26,29 @@ export const getStaticProps = async () => {
   const { data } = await client.query({
     query: gql`
       {
-        events(sort: "Start_time:asc") {
-          Event_name
-          Start_time
-          Slug
-          End_time
-        }
+  events(sort: "Start_time:asc"){
+    data{
+      attributes{
+        Event_name
       }
+    }
+    data{
+      attributes{
+        Start_time
+      }
+    }
+    data{
+      attributes{
+        Slug
+      }
+    }
+    data{
+      attributes{
+        End_time
+      }
+    }
+  }
+}
     `,
   });
   let allEvents = [];
